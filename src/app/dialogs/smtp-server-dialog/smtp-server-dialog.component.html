@@ -1,0 +1,64 @@
+<div style="padding:10px"><h2 mat-dialog-title>SMTP Configuration ({{smtpSetting.registrationDate | date:'medium'}})</h2></div>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill" style="display: block;">
+    <mat-label>SMTP Server </mat-label>
+    <input matInput name="server" type="text" required minlength="2" [(ngModel)]="smtpSetting.server"
+     #serverDiv="ngModel"/>
+    <span class="text-danger" *ngIf="serverDiv.errors?.['required']">Please provide a SMTP server address</span>
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="display: block;">
+    <mat-label>Port Number</mat-label>
+    <input matInput name="port" type="number" required minlength="2" placeholder="SMTP server port number" [(ngModel)]="smtpSetting.port" />
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="display: block;">
+		<mat-label>Authentication Method</mat-label>
+		<mat-select [(ngModel)]="smtpSetting.authMethod">
+			<mat-option *ngFor="let auth of authMethods" [value]="auth.value">
+				{{auth.name}}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+
+  <mat-form-field appearance="fill" style="display: block;">
+    <mat-label>Sender email</mat-label>
+    <input matInput name="fromname" type="text" minlength="2" placeholder="Sender email address" [(ngModel)]="smtpSetting.from" />
+  </mat-form-field>
+  <div *ngIf="smtpSetting.authMethod ===1 || smtpSetting.authMethod === 2 ">
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>User name</mat-label>
+      <input matInput name="username" type="text" required minlength="2" placeholder="SMTP user name if authentication required" [(ngModel)]="smtpSetting.username" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>Password</mat-label>
+      <input matInput name="password" type="password" required minlength="2" placeholder="SMTP user password if authentication required" [(ngModel)]="smtpSetting.password" />
+    </mat-form-field>
+  </div>
+  <mat-form-field appearance="fill" style="display: block;">
+		<mat-label>Security Protocol</mat-label>
+		<mat-select [(ngModel)]="smtpSetting.protocol">
+			<mat-option *ngFor="let protocol of protocols" [value]="protocol.value">
+				{{protocol.name}}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+
+  <mat-form-field appearance="fill" style="display: block;">
+    <div class="form-group">
+      <div class="input-group">
+        <input matInput name="testemail" type="email" placeholder="enter a test email address" [(ngModel)]="testemail"
+        pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #testemailDiv="ngModel"/>
+        <span class="text-danger" *ngIf="testemailDiv.errors?.['pattern']">Please enter a valid email address</span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="sendTestEmail()">Send test email</button>
+    <span style="color: blue;" *ngIf="status !=null"> {{ status}} </span>
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()">Close</button>
+  <button mat-raised-button (click)="updateSmtpSetting()">Save</button>
+  <button mat-raised-button (click)="removeSmtpSetting()">Delete</button>
+</div>
+

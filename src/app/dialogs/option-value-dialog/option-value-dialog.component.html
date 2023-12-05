@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Specifiy Options</h1>
+<div mat-dialog-content>
+	<mat-form-field appearance="fill" style="display: block;">
+		<mat-label>Options</mat-label>
+		<mat-chip-list #chipList aria-label="option selection">
+		<mat-chip
+			*ngFor="let option of data"
+			[selectable]="true"
+			[removable]="true"
+			(removed)="removeOption(option)">
+			{{option}}
+			<mat-icon matChipRemove>cancel</mat-icon>
+		</mat-chip>
+		<input
+			placeholder="New option..."
+			#optionInput
+      [formControl]="optionCtrl"
+			[matChipInputFor]="chipList"
+			[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+			(matChipInputTokenEnd)="addOption($event)"
+      >
+		</mat-chip-list>
+		<mat-hint align="start">Pressing Enter to confirm a value</mat-hint>
+	</mat-form-field>
+</div>
+<div mat-dialog-actions>
+	<button mat-raised-button (click)="onNoClick()">Close</button>
+</div>

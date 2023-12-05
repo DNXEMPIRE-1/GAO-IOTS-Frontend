@@ -1,0 +1,418 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  background:rgb(235, 234, 233);;
+  background-size: cover;
+  text-align: center;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+}
+
+.container{
+  margin: auto;
+	width: 70%;
+}
+
+
+
+.text-danger {
+  color: #ff0000!important;
+  font-weight: 300;
+}
+
+.btn-eazybank{
+    color: #fff;
+    background-color: #404040;
+    border-color: #404040;
+}
+
+.thead-light{
+  background-color: #57b846;
+  color: #ff0000;
+}
+
+.spacer {
+	flex: 1;
+}
+.rfid-description
+{
+  font-size: small;
+  font-weight: lighter;
+}
+
+.errorMessage
+{
+  color: #ff0000;
+}
+
+table {
+  width: 100%;
+}
+
+.full-width {
+  font-size: 14px;
+  width: 100%;
+}
+.center {
+  display: flex;
+  justify-content: center;
+}
+.spacer {
+	flex: 1;
+}
+
+.system-menu {
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  font-size: large;
+  font-weight: 500;
+}
+.system-menu:hover {
+  background-color: darkblue;
+  color: white;
+}
+.float-container {
+  border: 3px solid #fff;
+  padding: 10px;
+}
+
+.float-child {
+  width: 50%;
+  float: left;
+  padding: 10px;
+}
+.float-child-large {
+  width: 75%;
+  float: left;
+  padding: 10px;
+}
+.float-child-half {
+  width: 25%;
+  float: left;
+  padding: 10px;
+}
+.text-box {
+  padding: 20px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+}
+.text-box-1 {
+  padding: 15px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: pointer;
+  background: white;
+  font-size: 16px;
+}
+.schedule-action
+{
+  float: left;
+  padding: 5px;
+  margin-left: 5px;
+  background-color: blue;
+  border-radius: 5px;
+  border: 0px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.schedule-action-delete
+{
+  float: left;
+  padding: 2px;
+  border-radius: 5px;
+  border: 0px;
+  color: blue;
+}
+.location-tree-invisible {
+  display: none;
+}
+
+.location-tree ul,
+.location-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.mat-tree-node, .mat-nested-tree-node {
+  font-weight: 400;
+  font-size: 18px;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #666;
+  cursor: pointer;
+}
+/*
+ * This padding sets alignment of the nested nodes.
+ */
+.location-tree .mat-nested-tree-node div[role=group] {
+  padding-left: 20px;
+}
+
+/*
+ * Padding for leaf nodes.
+ * Leaf nodes need to have padding so as to align with other non-leaf nodes
+ * under the same parent.
+ */
+.location-tree div[role=group] > .mat-tree-node {
+  padding-left: 20px;
+}
+.selectedNode
+{
+  font-size: 17px;
+  font-weight: 500;
+  text-decoration: underline;
+}
+.calendar-action
+{
+  background-color: blue;
+  color: #fff;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  width: 200px;
+}
+.calendar-action-delete
+{
+  color: blue;
+  font-weight: bold;
+  cursor: pointer;
+}
+.selected-schedule
+{
+  background-color: #eee;
+}
+.rowcolor
+{
+  color:blue;
+  background-color: #f5f5f5;
+}
+.icon {
+  position: relative;
+  /* Adjust these values accordingly */
+  top: 5px;
+  left: 5px;
+}
+.icon-small {
+  position: relative;
+  /* Adjust these values accordingly */
+  top: 5px;
+  left: 5px;
+  font-size: 14px;
+}
+
+.statistics-grid :hover
+{
+  background-color: #e9ecef;
+}
+.statistics-grid .fa,
+.statistics-grid .lnr {
+  font-size: 50px;
+  color: #aaa;
+  margin-bottom: 15px;
+  transition: 0.3s ease;
+  opacity: 0.3;
+  position: absolute;
+}
+
+.statistics-grid .card__grid--effect .fa,
+.statistics-grid .card__grid--effect .lnr {
+  color: #aba9a9;
+  margin-bottom: 0;
+  border-radius: 200px;
+  line-height: 60px;
+  width: 60px;
+  height: 60px;
+  display: inline-block;
+  text-align: center;
+  font-size: 22px;
+}
+
+.statistics-grid {
+  min-width: 300px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+
+  border-radius: 0.25rem;
+}
+.card > hr {
+  margin-right: 0;
+  margin-left: 0;
+}
+.card > .list-group:first-child .list-group-item:first-child {
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+.card > .list-group:last-child .list-group-item:last-child {
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1.25rem;
+}
+
+.card-title {
+  margin-bottom: 0.75rem;
+}
+
+.card-subtitle {
+  margin-top: -0.375rem;
+  margin-bottom: 0;
+}
+
+.card-text:last-child {
+  margin-bottom: 0;
+}
+
+.card-link:hover {
+  text-decoration: none;
+}
+
+.card-link + .card-link {
+  margin-left: 1.25rem;
+}
+
+.card-header {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+.card-header:first-child {
+  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+}
+.card-header + .list-group .list-group-item:first-child {
+  border-top: 0;
+}
+
+.card-footer {
+  padding: 0.75rem 1.25rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+.card-footer:last-child {
+  border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);
+}
+
+.card-header-tabs {
+  margin-right: -0.625rem;
+  margin-bottom: -0.75rem;
+  margin-left: -0.625rem;
+  border-bottom: 0;
+}
+
+.card-header-pills {
+  margin-right: -0.625rem;
+  margin-left: -0.625rem;
+}
+
+.card-img-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1.25rem;
+}
+
+.card-img,
+.card-img-top,
+.card-img-bottom {
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.card-img,
+.card-img-top {
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+}
+
+.card-img,
+.card-img-bottom {
+  border-bottom-right-radius: calc(0.25rem - 1px);
+  border-bottom-left-radius: calc(0.25rem - 1px);
+}
+
+.card-deck .card {
+  margin-bottom: 15px;
+}
+
+.border-primary-top:hover{
+
+  cursor: pointer;
+}
+
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+h3.number {
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 36px;
+  text-align: right;
+  color: var(--heading-color);
+  transition: .3s ease;
+  margin-bottom: 0;
+}
+
+p.stat-text {
+  font-size: 14px;
+  text-align: right;
+}
+
+
+.sidemenu
+{
+  font-size: 14px;
+  font-weight: 500;
+  color: #00001a;
+}
+.flex-me {
+  display: inline-flex;
+  flex-flow: row wrap;
+}
+mat-card:hover
+{
+  background-color: #eee;
+}
+mat-card {
+  height: 120px;
+  width: 300px;
+  margin: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.help-text {
+  color: darkblue;
+  padding: 5px;
+}

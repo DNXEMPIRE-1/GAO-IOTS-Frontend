@@ -1,0 +1,50 @@
+<div align="left" style="padding:10px"><span class="device-info">{{device.name}}</span>
+                                       <span class="device-info" *ngIf="device.deviceModel">[Model: {{device.deviceModel.name}}</span>
+                                       <span class="device-info">IP: {{device.ipAddress}}</span>
+                                       <span class="device-info" *ngIf="device.status && device.status === true">Connected]</span>
+                                       <span class="device-info" *ngIf="device.status===false">Disconnected]</span>
+                                       <span class="device-info" (click)="refresh()">
+                                          <button mat-button class="btn btn-primary"><mat-icon >autorenew</mat-icon></button>
+                                        </span>
+</div>
+<div>{{ getStatus()}} </div>
+<table mat-table [dataSource]="getDataSource()" class="mat-elevation-z8" >
+  <ng-container matColumnDef="tagId">
+      <th mat-header-cell *matHeaderCellDef>Tag ID</th>
+      <td mat-cell *matCellDef="let element"  style="cursor:pointer;color:darkblue" align="left"> {{element.deviceId}} </td>
+  </ng-container>
+  <ng-container matColumnDef="reader">
+    <th mat-header-cell *matHeaderCellDef>Reader</th>
+    <td mat-cell *matCellDef="let element" style="cursor:pointer;color:darkblue" align="left">{{element.scanDevice}}</td>
+  </ng-container>
+  <ng-container matColumnDef="antenna">
+    <th mat-header-cell *matHeaderCellDef>Antenna</th>
+    <td mat-cell *matCellDef="let element" style="cursor:pointer;color:darkblue" align="left">
+      <span *ngIf="element.antenna">{{ element.antenna}}</span>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="count">
+      <th mat-header-cell *matHeaderCellDef>Count</th>
+      <td mat-cell *matCellDef="let element" align="left">1</td>
+  </ng-container>
+  <ng-container matColumnDef="rssi">
+      <th mat-header-cell *matHeaderCellDef>RSSI</th>
+      <td mat-cell *matCellDef="let element" class="link" align="left"> {{element.rssi}} </td>
+  </ng-container>
+  <ng-container matColumnDef="time">
+    <th mat-header-cell *matHeaderCellDef>Time</th>
+    <td mat-cell *matCellDef="let element"  class="link" align="left"> {{element.timestamp | fieldFormat }} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="columns"></tr>
+  <tr mat-row *matRowDef="let row; columns: columns;let i = index; " [ngClass]="{rowcolor: i % 2 == 0 }"></tr>
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" [attr.colspan]="columns.length">
+      You may test the device by clicking on the [Test Reader] button or [Back] to the RFID Reader panel.
+    </td>
+  </tr>
+</table>
+<div style="padding:20px">
+  <button class="btn btn-primary" style="margin:10px" mat-raised-button (click)="back()">Back</button>
+  <button class="btn btn-primary" style="margin:10px" mat-raised-button (click)="clear()">Clear</button>
+  <button class="btn btn-primary" style="margin:10px" mat-raised-button (click)="test()">Test Reader</button>
+</div>

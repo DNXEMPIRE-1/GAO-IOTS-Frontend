@@ -1,0 +1,33 @@
+<div class="content" role="main">
+	<mat-toolbar style="background-color: blue;color: #fff;">
+		<div >
+			<div>RFID Tracking Entity</div>
+			<div class="rfid-description" style="padding-left: 50px;">select an entity type to manage entities</div>
+		</div>
+		<div class="spacer"></div>
+    <button mat-icon-button (click)="backHome()">
+      <mat-icon>close</mat-icon>
+    </button>
+	</mat-toolbar>
+  <mat-tab-group *ngIf="!status">
+    <mat-tab label="Entity Management">
+      <mat-drawer-container autosize>
+        <app-rfidobject-list-view2
+        style="width: 100%" [items]="items"  >
+       </app-rfidobject-list-view2>
+      </mat-drawer-container>
+    </mat-tab>
+    <mat-tab label="Entity Group">
+      <mat-drawer-container autosize>
+        <app-user-group-list-view
+               style="width: 100%" [groups]="groups" (newCreated)="refreshGroups()" >
+        </app-user-group-list-view>
+      </mat-drawer-container>
+    </mat-tab>
+    <mat-tab label="Group Members">
+      <app-group-members [groups]="groups" [objTypes]="items" ></app-group-members>
+    </mat-tab>
+</mat-tab-group>
+<div *ngIf="status !=''" class="errorMessage">{{ status}} </div>
+</div>
+

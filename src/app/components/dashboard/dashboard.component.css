@@ -1,0 +1,91 @@
+@import "../../../assets/css/font-awesome.css";
+
+.sticky-header .main-content {
+  padding-top: 40px;
+}
+
+.container-fluid,
+.container-sm,
+.container-md,
+.container-lg,
+.container-xl {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.content-top-gap {
+  margin-top: 60px;
+  padding: 20px;
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  list-style: none;
+  background-color: #e9ecef;
+  border-radius: 0.25rem;
+}
+
+.breadcrumb-item + .breadcrumb-item {
+  padding-left: 0.5rem;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+  display: inline-block;
+  padding-right: 0.5rem;
+  color: #6c757d;
+  content: "/";
+}
+
+.breadcrumb-item + .breadcrumb-item:hover::before {
+  text-decoration: underline;
+}
+
+.breadcrumb-item + .breadcrumb-item:hover::before {
+  text-decoration: none;
+}
+
+.breadcrumb-item.active {
+  color: #6c757d;
+}
+
+.my-breadcrumb {
+  padding: 0;
+  margin-bottom: 10px;
+  list-style: none;
+  background-color: transparent;
+  border-radius: 0;
+  font-size: 14px;
+}
+
+.welcome-msg {
+  text-align: left;
+}
+
+.welcome-msg h1 {
+  font-size: 24px;
+}
+
+.welcome-msg p {
+  font-size: 14px;
+}
+
+.text-primary.transparent-bg {
+  background: rgba(65, 105, 225, 0.1);
+}
+
+.pt-3,
+.py-3 {
+  padding-top: 1rem !important;
+}
+
+.pb-4,
+.py-4 {
+  padding-bottom: 1.5rem !important;
+}
+
+

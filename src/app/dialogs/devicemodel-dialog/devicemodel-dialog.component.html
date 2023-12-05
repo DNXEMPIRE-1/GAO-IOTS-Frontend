@@ -1,0 +1,32 @@
+<div style="padding:20px"><h1 mat-dialog-title>Device Model Configuration </h1></div>
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>Model</mat-label>
+      <input matInput name="name" type="text" required minlength="2" placeholder="Device model name" [(ngModel)]="deviceModel.name" #name="ngModel"/>
+      <span class="text-danger" *ngIf="(name.touched) &&
+      name.errors?.['required']">name is required !</span>
+    </mat-form-field>
+    <div style="padding:10px">
+        <mat-form-field appearance="fill" style="margin:1px;width:48%">
+          <mat-label>Device Driver</mat-label>
+          <mat-select [(ngModel)]="deviceModel.driverClass">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let driver of drivers" [value]="driver.className">
+              {{driver.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="margin:1px;width:48%">
+          <mat-label>Registration Date</mat-label>
+          <input matInput name="value" type="datetime"  readonly placeholder="Value" [(ngModel)]="deviceModel.createDate" />
+        </mat-form-field>
+    </div>
+    <app-rfidobject-attributes-form [attributes]="deviceModel.attributes" [types]="types" (creator)="addField()" (remover)="removeField($event)" (defineOptions)="defineOptions($event)"></app-rfidobject-attributes-form>
+    <app-antenna-form [deviceModel]="deviceModel" ></app-antenna-form >
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Close</button>
+    <button mat-raised-button (click)="!name.errors && updateDeviceModel()">Save</button>
+  </div>
+
+

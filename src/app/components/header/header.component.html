@@ -1,0 +1,33 @@
+<mat-toolbar class="mat-app-background mat-elevation-z8" color="primary">
+  <div class="menu-icon" routerLinkActive="active">
+    <button mat-icon-button (click)="toggleSideNav($event)">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
+  <div class="hleft">
+    <a
+      [routerLink]="user.authStatus != 'AUTH' ? ['/home'] : ['/dashboard']"
+      class="system-menu"><span style="color:red">GAO</span> IoTs</a>
+  </div>
+
+   <div *ngIf="user.authStatus != 'AUTH'" routerLinkActive="active">
+    <a mat-button routerLink="/home" class="system-menu">Home</a>
+  </div>
+  <div *ngIf="user.authStatus != 'AUTH'" routerLinkActive="active">
+    <a mat-button routerLink="/contact" class="system-menu">Contact US</a>
+  </div>
+  <div *ngIf="user.authStatus == 'AUTH'" routerLinkActive="active">
+    <a mat-button routerLink="/dashboard" class="system-menu">Dashboard</a>
+  </div>
+  <div *ngIf="user.authStatus == 'AUTH'" routerLinkActive="active">
+    <a mat-button routerLink="/logout" class="system-menu">Logout</a>
+  </div>
+
+  <h1 class="spacer"></h1>
+  <div *ngIf="user.authStatus != 'AUTH'" routerLinkActive="active">
+    <a mat-button mat-icon routerLink="/login" class="system-menu">
+      login <mat-icon> person </mat-icon></a
+    >
+  </div>
+</mat-toolbar>

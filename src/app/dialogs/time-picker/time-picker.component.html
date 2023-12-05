@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Schedule for {{ title}} </h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label class="reportfield">Access Control Action</mat-label>
+        <mat-select [(ngModel)]="scheduleAction.permission" required #action="ngModel">
+          <mat-option *ngFor="let item of permissions" [value] = item >{{item.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="text-danger" *ngIf="(action.touched) &&  action.errors?.['required']">action is required !</div>
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>From</mat-label>
+      <input matInput name="loginid" type="time" value="07:30:00"  required minlength="2"  placeholder="Time from"  [(ngModel)]="scheduleAction.timeRange.from"/>
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>To</mat-label>
+      <input matInput name="loginid" type="time" required minlength="2"  placeholder="Time to"  [(ngModel)]="scheduleAction.timeRange.end"/>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Close</button>
+    <button mat-raised-button (click)="!action.errors && update()">Save</button>
+  </div>
+

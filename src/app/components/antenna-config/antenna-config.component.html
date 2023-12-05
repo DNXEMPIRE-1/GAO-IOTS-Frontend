@@ -1,0 +1,24 @@
+<div style="padding:15px">
+  <h2 *ngIf="device.deviceModel">Device: {{device.name}} - Model: {{device.deviceModel.name}}</h2>
+</div>
+<div class="float-container">
+  <div class="float-child-large">
+    <div style="margin-left:5px">
+      <app-antenna-form *ngIf="device.deviceModel"
+        [deviceModel]="device.deviceModel"
+        [device]="device"
+        [deviceConfiguration]="true">
+      </app-antenna-form >
+    </div>
+    <div style="padding:20px">
+      <button style="margin:10px" mat-raised-button (click)="back()">Back</button>
+      <button style="margin:10px" mat-raised-button (click)="updateAntenna()">Save</button>
+    </div>
+  </div>
+  <div class="float-child-half">
+    <div align="left" class="location-box"><span *ngIf="location" style="color:blue" draggable="true" (dragstart)="drag(location)"> {{location.name}}</span>
+      <span *ngIf="!location">Select a location and assign to an antenna</span>
+    </div>
+    <app-location-selection  [device] = "device" (locationSelected)="onLocationSelected($event)" [showClose]="false"></app-location-selection>
+  </div>
+</div>

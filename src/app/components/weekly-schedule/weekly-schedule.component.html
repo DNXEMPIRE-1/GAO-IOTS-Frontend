@@ -1,0 +1,54 @@
+<div class="float-container">
+  <div class="float-child">
+    <h3>Create, view or edit weekly schedules</h3>
+    <table mat-table [dataSource]="weekSchedule.weekDaySchedules" class="mat-elevation-z8 demo-table">
+        <!-- Position Column -->
+        <ng-container matColumnDef="day-of-week">
+          <th mat-header-cell *matHeaderCellDef>  </th>
+          <td mat-cell *matCellDef="let element" align="left"> {{element.dayIndex | weekdayShortName}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="schedules">
+          <th mat-header-cell *matHeaderCellDef align="left" style="margin-left:10px">
+            <div style="padding:10px">Time range actions (00:00AM-11:59PM)</div>
+            <input type="text" id="name" name="name"placeholder=" schedule name..." required
+                  style="border-radius: 5px;height: 30px;" [(ngModel)]="weekSchedule.name" #name="ngModel"
+                  size="40"/>
+            <mat-icon style="height:20px;margin-left:10px" (click)="!name.errors && save()" matTooltip="Save...">save</mat-icon>
+            <mat-icon style="height:20px;margin-left:10px;font-weight: bold;" (click)="newWeekSchedule()" matTooltip="new schedule...">add</mat-icon>
+            <div>&nbsp;
+              <span class="text-danger" *ngIf="(name.touched) &&  name.errors?.['required']">name is required !</span>
+
+            </div>
+            <div><div *ngFor="let item of periods" class="time-period"> {{item}}</div></div>
+          </th>
+          <td mat-cell *matCellDef="let element;index as j" align="left">
+            <div *ngFor="let item of element.actions" >
+                <div class="schedule-action" (click)="openTimePicker(item)">
+                  <span style="margin:5px" *ngIf="item.permission">{{item.permission.name}}:</span>
+                  <span>{{item.timeRange.from}}</span>
+                  <span> - {{item.timeRange.end}}</span>
+                </div>
+                <div class="schedule-action-delete" (click)="removeAction(item)"><mat-icon>delete</mat-icon></div>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="add">
+          <th mat-header-cell *matHeaderCellDef>  </th>
+          <td mat-cell *matCellDef="let element" align="left" (click)="newAction(element)"><mat-icon>add</mat-icon></td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'selected-row': selectedDay === row }" (click)="selectRow(row)"></tr>
+      </table>
+      <p *ngIf="message" style="padding:10px;color:blue">{{message}}</p>
+  </div>
+  <div class="float-child">
+    <h2>Weekly Schedules</h2>
+    <div class="text-box-1" *ngFor="let item of weekSchedules" (click)="selectSchedule(item)"
+          [ngClass]="{ 'selected-row': weekSchedule === item }">{{item.name}}
+          <mat-icon (click)="onDeleteSchedule(item)">delete</mat-icon>
+    </div>
+  </div>
+  </div>
+

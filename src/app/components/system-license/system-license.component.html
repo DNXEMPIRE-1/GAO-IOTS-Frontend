@@ -1,0 +1,21 @@
+<section class="ftco-section" id="cards">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 cardheader" *ngFor="let license of licenses">
+        <div class="card">
+          <div class="icon-wrap px-4 pt-4">
+            <div class="icon d-flex justify-content-center align-items-center bg-success rounded-circle fa fa-envelope-open">
+              <span class="ion-logo-ionic text-light"></span>
+            </div>
+          </div>
+          <div class="card-body pb-5 px-4">
+            <h5 class="card-title">Company: {{license.company}}</h5>
+            <p class="card-text">Server: {{license.systemid}}</p>
+            <p class="card-text">Issue date: {{license.timestamp}}</p>
+            <a routerLink="/licDetails" class="btn btn-success" style="background-color: black;">Details</a>
+          </div>
+        </div>
+      </div>
+     </div>
+  </div>
+</section>

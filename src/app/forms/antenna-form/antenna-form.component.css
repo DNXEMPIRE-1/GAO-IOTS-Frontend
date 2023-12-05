@@ -1,0 +1,28 @@
+.selectedAnt {
+  background-color: #999;
+  color: #fff;
+  border-radius: 5px;
+}
+.input-area
+{
+  width:70px !important;
+  margin: 10px;
+  cursor: pointer;
+}
+.input-area-id
+{
+  width:30px !important;
+  margin: 10px;
+}
+.input-header
+{
+  width:80px !important;
+  margin: 15px;
+  font-weight: bolder;
+}
+.input-header-id
+{
+  width:70px !important;
+  margin: 10px;
+  font-weight: bolder;
+}

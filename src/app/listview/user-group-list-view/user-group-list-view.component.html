@@ -1,0 +1,80 @@
+<div class="container">
+  <div *ngIf="panel==='listview'">
+      <button mat-icon-button (click)="showNewPanel()" color="primary">
+        New Group <mat-icon>create_new_folder</mat-icon>
+      </button>
+      <mat-list style="width: 100%;padding: 10px" class="rfid-class1">
+        <mat-list-item style="border-bottom: 1px solid #000;" class="mat-list-option" *ngFor="let item of groups">
+            <mat-icon mat-list-icon color="primary" (click)="showEditPanel(item)">arrow_back</mat-icon>
+            <h3 style="font-size: x-large;" matLine (click)="showEditPanel(item)">{{item.name}}
+              <span *ngIf="item.count>0" (click)="selected = item">( {{item.count}} entities )</span>
+            </h3>
+            <span style="font-size: small;" matLine (click)="selected = item">{{item.description}}</span>
+            <button mat-icon-button (click)="onDelete(item)">
+              <mat-icon color="primary">delete</mat-icon>
+          </button>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+  </div>
+  <div *ngIf="panel==='edit'" align="left" style="padding-top:10px">
+      <mat-form-field appearance="fill" style="margin:1px; width:45%">
+      <mat-label>Name</mat-label>
+      <input matInput name="name" id="name" type="text" required minlength="2" placeholder="Group Name" [(ngModel)]="selected.name" #name="ngModel"/>
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin:1px; width:45%">
+      <mat-label>Group Type</mat-label>
+      <input matInput type="text" readonly matInput name="Type"  placeholder="Please specify group type" value="Entity Group" >
+    </mat-form-field>
+    <mat-icon (click)="!name.errors && update()">save</mat-icon>
+    <mat-icon (click)="panel='listview'">close</mat-icon>
+    <div class="text-danger" *ngIf="name.errors?.['required']">name is required !</div>
+    <mat-form-field appearance="fill" style="margin:1px; width:90%">
+      <mat-label>Description</mat-label>
+      <input matInput name="decription" type="text" required minlength="2" placeholder="Description" [(ngModel)]="selected.description" />
+    </mat-form-field>
+      <div align="left">
+        <mat-form-field appearance="fill" style="margin:1px;width:45%" >
+          <mat-label class="reportfield">Location Group</mat-label>
+          <mat-select  class="reportfield" [(ngModel)]="locationGroup" >
+            <mat-option *ngFor="let item of locationGroups" [value] = item >{{item.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="margin:1px;width:45%" *ngIf="scheduleName==='weekly'">
+            <mat-label class="reportfield">Weekly Schedule</mat-label>
+            <mat-select  class="reportfield" [(ngModel)]="schedule">
+              <mat-option *ngFor="let item of weeklySchedules" [value] = item >{{item.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" style="margin:1px;width:45%" *ngIf="scheduleName==='calendar'">
+            <mat-label class="reportfield">Calendar Schedule</mat-label>
+            <mat-select  class="reportfield" [(ngModel)]="schedule">
+              <mat-option *ngFor="let item of calendarSchedules" [value] = item >{{item.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-icon (click)="addAccessSchedule()">add</mat-icon>
+      </div>
+      <div class="float-container">
+        <div class="float-child">
+          <div>
+            <span class="schedule-item" style="font-weight: 600;">Access Schedules</span>
+            <span class="schedule-type" (click)="changeSchedule()">{{scheduleName}}</span>
+            <span class="text-danger" style="margin-left:30px">{{status}}</span>
+          </div>
+          <div *ngIf="selected.locationAccessSchedules" >
+
+            <div *ngFor="let item of selected.locationAccessSchedules">
+              <div>
+                <span class="schedule-item"><mat-icon class="icon" style="margin-right: 5px;" (click)="locationAccessSchedule=item">calendar_today</mat-icon>{{ getLocationGroupName(item.locationGroupId)}}</span>
+                <span class="schedule-item">[{{ getScheduleName(item.schedule)}}]</span>
+                <span class="schedule-item icon" (click)="deleteSchedule(item)"><mat-icon>delete</mat-icon></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-permission-controls [locationAccessSchedule]="locationAccessSchedule" class="float-child" *ngIf="locationAccessSchedule" align="left">
+
+        </app-permission-controls>
+      </div>
+  </div>
+  </div>

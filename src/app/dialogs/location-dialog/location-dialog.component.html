@@ -1,0 +1,60 @@
+<div style="padding:20px"><h1 mat-dialog-title>Location Registration </h1></div>
+  <div *ngIf="parentLocation">Parent Location: {{parentLocation.name}}</div>
+  <div mat-dialog-content>
+    <div align="left">
+      <span class="text-danger" *ngIf="name.errors?.['required']">Name is required !</span>
+    </div>
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>Name</mat-label>
+      <input matInput name="name" type="text" required minlength="2" placeholder="Location Name" [(ngModel)]="location.name" #name="ngModel"/>
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>Location Type</mat-label>
+      <mat-select matInput name="Location Type"  placeholder="Please specify location type" [(ngModel)]="location.locationType" (selectionChange)="onTypeChange($event.value)">
+        <mat-option *ngFor="let value of locationTypes" [value]="value.name">{{value.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="display: block;" *ngFor="let attribute of location.attributes" >
+      <mat-label>{{attribute.name}}</mat-label>
+      <input *ngIf="attribute.type =='Number'" required="{{attribute.required}}" matInput name={{attribute.name}}   type="number" placeholder="Please specify {{attribute.name}}" [(ngModel)]="attribute.value" />
+      <input *ngIf="attribute.type =='String'" required="{{attribute.required}}" matInput name={{attribute.name}}   type="text" placeholder="Please specify {{attribute.name}}" [(ngModel)]="attribute.value" />
+      <input *ngIf="attribute.type =='Date'" required="{{attribute.required}}" matInput name={{attribute.name}}   type="date" placeholder="Please specify {{attribute.name}}" [(ngModel)]="attribute.value" />
+      <mat-select *ngIf="attribute.type =='Selections'" matInput name={{attribute.name}}  placeholder="Please specify {{attribute.name}}" [(ngModel)]="attribute.value" >
+        <mat-option *ngFor="let value of attribute.selections" [value]="value">{{value}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div *ngIf="location.image" style="padding:20px" align="left"><img src={{location.image}} height="50px" width="50px"/>
+      <mat-icon (click)="removeImage()">delete</mat-icon>
+    </div>
+    <mat-form-field>
+      <div>
+        <mat-toolbar>
+          <!-- Display files names -->
+          <input matInput [(ngModel)]="fileAttr" readonly name="image" />
+          <!-- Browse Button -->
+          <button mat-flat-button color="primary">Location Image</button>
+        </mat-toolbar>
+        <!-- Fetch selected filed on change -->
+        <input
+          type="file"
+          #fileInput
+          id="uploadFile"
+          (change)="uploadImage($event)"
+          name="uploadFile"
+          multiple="multiple"
+          accept="image/*"
+        />
+      </div>
+    </mat-form-field>
+
+    <div align="left" >
+      <span style="margin:10px"><mat-checkbox [(ngModel)]="location.monitor" color="primary">Add to monitor</mat-checkbox></span>
+      <span style="margin:10px"><mat-checkbox [(ngModel)]="location.useParentImage" color="primary" *ngIf="location.parentId">Use Parent Image</mat-checkbox></span>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Close</button>
+    <button mat-raised-button (click)="!name.errors &&updateLocation()">Save</button>
+  </div>
+  <div class="text-danger" style="padding:10px">{{status}}</div>
+

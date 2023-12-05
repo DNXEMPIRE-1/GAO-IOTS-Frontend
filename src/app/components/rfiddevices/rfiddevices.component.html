@@ -1,0 +1,70 @@
+<div class="container" >
+
+  <div style="padding: 20px;border-bottom: 1px solid #000;">
+    <div><span style="font-size:20px;font-weight:bold">RFID Device Management</span>
+      <button mat-icon-button (click)="backHome()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <ng-container *ngIf="!status && panelName ==='device'">
+    <div style="padding:10px">
+      <button class="btn btn-primary" (click)="createDevice()"> New Device </button>
+    </div>
+    <table *ngIf="dataSource != null" mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+      <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element" (click)="updateDevice(element)" style="cursor:pointer;color:darkblue" align="left"> {{element.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="model">
+        <th mat-header-cell *matHeaderCellDef>Model</th>
+        <td mat-cell *matCellDef="let element" (click)="updateDevice(element)" style="cursor:pointer;color:darkblue" align="left">
+          <span *ngIf="element.deviceModel">{{element.deviceModel.name}}</span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="antenna">
+        <th mat-header-cell *matHeaderCellDef>Antenna</th>
+        <td mat-cell *matCellDef="let element" (click)="configAntenna(element)" style="cursor:pointer;color:darkblue" align="left">
+          <span *ngIf="element.deviceModel && element.deviceModel.antennas">{{ element.deviceModel.antennas.length}}
+            <mat-icon class="icon">settings</mat-icon>
+          </span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="ipAddress">
+          <th mat-header-cell *matHeaderCellDef>IP</th>
+          <td mat-cell *matCellDef="let element" (click)="updateDevice(element)" class="link" align="left"> {{element.ipAddress}} </td>
+      </ng-container>
+      <ng-container matColumnDef="fqdn">
+        <th mat-header-cell *matHeaderCellDef>FQDN</th>
+        <td mat-cell *matCellDef="let element" (click)="updateDevice(element)" class="link" align="left"> {{element.fqdn }} </td>
+      </ng-container>
+      <ng-container matColumnDef="status" >
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element" (click)=" showTestPanel(element)" class="link" align="left">
+          <span *ngIf="element.status === true"  class="link" align="left">
+              <mat-icon style="color:blue">signal_cellular_alt</mat-icon>
+          </span>
+          <span *ngIf="!element.status || element.status === false" ><mat-icon color="gray">signal_cellular_alt</mat-icon></span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="controlType" >
+        <th mat-header-cell *matHeaderCellDef>Control</th>
+        <td mat-cell *matCellDef="let element" class="link" align="left">
+          <span *ngIf="element.controlType"  class="link" align="left">
+              {{element.controlType | controlTypeDisplay}}
+          </span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell *matCellDef="let element" (click)="onDeleteDevice(element)" class="link"><mat-icon>delete</mat-icon></td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns;let i = index; " [ngClass]="{rowcolor: i % 2 == 0 }"></tr>
+  </table>
+  </ng-container>
+  <app-antenna-config *ngIf="panelName==='antenna'" [device]="selectedDevice" (showDevice)="panelName='device'"></app-antenna-config>
+  <app-testdevice *ngIf="panelName==='testdevice'" [device]="selectedDevice" (showDevice)="panelName='device'"></app-testdevice>
+  <div *ngIf="status !=''" class="errorMessage">{{ status}} </div>
+</div>
+

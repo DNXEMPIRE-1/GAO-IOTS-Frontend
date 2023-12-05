@@ -1,0 +1,14 @@
+<div style="padding:15px">
+    <h1 mat-dialog-title>Antenna Configuration </h1>
+    <h2 *ngIf="device.deviceModel">Device: {{device.name}} - Model: {{device.deviceModel.name}}</h2>
+</div>
+  <div mat-dialog-content style="margin-left:5px">
+    <app-antenna-form *ngIf="device.deviceModel" [deviceModel]="device.deviceModel" [deviceConfiguration]="true"></app-antenna-form >
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Close</button>
+    <button mat-raised-button (click)="updateAntenna()">Save</button>
+  </div>
+
+
+

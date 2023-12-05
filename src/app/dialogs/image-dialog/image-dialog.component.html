@@ -1,0 +1,6 @@
+<div MatDialog (click)="closeDialog()">
+    <div style="font-size: 2em;padding:10px">{{data.name}}
+      <button mat-icon-button (click)="closeDialog()"><mat-icon >close</mat-icon></button>
+    </div>
+  <div mat-dialog-content><img src='{{data.base64}}' (click)="closeDialog()"/></div>
+</div>

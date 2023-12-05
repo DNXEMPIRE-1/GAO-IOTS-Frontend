@@ -1,0 +1,44 @@
+<div *ngIf="schedule.type === 1" align="left">
+  <table mat-table [dataSource]="getWeekDaySchedules()" class="mat-elevation-z8 demo-table">
+    <!-- Position Column -->
+    <ng-container matColumnDef="day-of-week">
+      <th mat-header-cell *matHeaderCellDef>  </th>
+      <td mat-cell *matCellDef="let element" align="left"> {{element.dayIndex | weekdayShortName}} </td>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="schedules">
+      <th mat-header-cell *matHeaderCellDef align="left" style="margin-left:10px">
+      </th>
+      <td mat-cell *matCellDef="let element;index as j" align="left">
+        <div *ngFor="let item of element.actions" >
+            <div class="permission-control" (click)="configPermission(item)">
+              <div class="permission-control-period">
+                <span style="margin:2px" *ngIf="item.permission">{{item.permission.name}}:</span>
+                <span>{{item.timeRange.from}}</span>
+                <span> - {{item.timeRange.end}}</span>
+              </div>
+              <div class="permission-control-item">
+                <span class="permission-checkbox"><mat-checkbox [(ngModel)]="item.permission.enter" color="primary">Enter</mat-checkbox></span>
+             <span class="permission-checkbox"><mat-checkbox [(ngModel)]="item.permission.exit" color="primary">Exit</mat-checkbox></span>
+              </div>
+            </div>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'selected-row': selectedDay === row }" (click)="selectRow(row)"></tr>
+  </table>
+</div>
+<div *ngIf="schedule.type === 2" align="left">
+  <div align="left" style="padding:10px">
+    <div> {{schedule.date | date:'short'}}</div>
+    <mat-list role="list">
+      <mat-list-item *ngFor="let item of schedule.actions" role="listitem">
+        <div class="permission-control-calendar" *ngIf="item.permission"> {{item.permission.name}}: {{item.timeRange.from}} - {{item.timeRange.end}}
+             <span class="permission-checkbox"><mat-checkbox [(ngModel)]="item.permission.enter" color="primary">Enter</mat-checkbox></span>
+             <span class="permission-checkbox"><mat-checkbox [(ngModel)]="item.permission.exit" color="primary">Exit</mat-checkbox></span>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>
+

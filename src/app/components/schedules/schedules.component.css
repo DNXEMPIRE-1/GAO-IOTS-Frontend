@@ -1,0 +1,90 @@
+.flex-me {
+  display: inline-flex;
+  flex-flow: row wrap;
+}
+
+mat-card {
+  margin: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.example-tree-invisible {
+  display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.mat-tree-node, .mat-nested-tree-node {
+  font-weight: 400;
+  font-size: 16px;
+  color: #101010;
+  cursor: pointer;
+}
+/*
+ * This padding sets alignment of the nested nodes.
+ */
+.example-tree .mat-nested-tree-node div[role=group] {
+  padding-left: 40px;
+}
+
+/*
+ * Padding for leaf nodes.
+ * Leaf nodes need to have padding so as to align with other non-leaf nodes
+ * under the same parent.
+ */
+.example-tree div[role=group] > .mat-tree-node {
+  padding-left: 40px;
+}
+.selectedNode
+{
+  font-size: 17px;
+  font-weight: 500;
+  text-decoration: underline;
+}
+.inline-calendar-card {
+  width: 90%;
+}
+::ng-deep .mat-calendar-body-label{
+  display: none;
+ }
+ .selected-row
+{
+  background-color: #f0f0f0;
+}
+
+.example-form-field {
+  margin: 0 8px 16px 0;
+}
+.calendar-area
+{
+  font-size: 18px;
+}
+.time-range {
+  width: 25%;
+  float: left;
+  padding: 10px;
+}
+.calendar-action
+{
+  background-color: blue;
+  color: #fff;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  width: 200px;
+}
+.calendar-action-delete
+{
+  color: blue;
+  font-weight: bold;
+  cursor: pointer;
+}
+.selected-schedule
+{
+  background-color: #eee;
+}

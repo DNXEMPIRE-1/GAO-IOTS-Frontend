@@ -1,0 +1,24 @@
+<div style="padding: 10px;border-bottom: 1px solid #000;">
+  <span style="text-align: center;font-size: x-large;"> {{rfidObject.name}} </span>
+  <span class="spacer"></span>
+  <button class="btn btn-primary" (click)="createEntity()">
+    New Entity
+  </button>
+  </div>
+  <ng-container >
+    <mat-list style="width: 100%;padding-left: 10px;padding-right: 10px;" class="rfid-class1">
+      <mat-list-item style="border-bottom: 1px solid #000;" class="mat-list-option" *ngFor="let item of items; let even=even;"
+
+      [ngStyle]="{backgroundColor: even==true ? '#e9ecef': '#fff'}">
+          <mat-icon mat-list-icon color="primary" (click)="updateEntity(item)">edit</mat-icon>
+          <h3 style="font-size: large;" matLine > <span (click)="updateEntity(item)">{{item.name}} </span>
+            <span *ngIf="item.tagid !=''" (click)="updateEntity(item)">[{{item.tagid}}]</span>
+            <span *ngIf="item.image" style="margin:10px" (click)="showImage(item)"><img src="{{item.image}}"  height="30"  /></span>
+          </h3>
+            <button mat-icon-button (click)="onDelete(item)">
+                <mat-icon color="primary">delete</mat-icon>
+            </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+    </ng-container>

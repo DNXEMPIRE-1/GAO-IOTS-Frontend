@@ -1,0 +1,9 @@
+
+	<div>
+        <app-rfidobject-form [entity]="entity" ></app-rfidobject-form>
+  </div>
+	<div style="padding:20px">
+		<button mat-raised-button class="btn btn-primary" (click)="saver.emit()" style="margin-right:20px">{{saveTitle}}</button>
+		<button mat-raised-button class="btn btn-primary"  (click)="discarder.emit()">Cancel</button>
+  </div>
+

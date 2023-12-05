@@ -1,0 +1,65 @@
+<div>
+  <span>Antennas (Control Type: 0 - Scan, 1 - Enter, 2 - Exit)</span>
+  <span class="spacer"></span>
+  <button *ngIf="deviceConfiguration==false" mat-icon-button (click)="addAntenna()"><mat-icon>add</mat-icon></button>
+</div>
+
+  <table *ngIf="dataSource != null" mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element" style="cursor:pointer;color:darkblue" align="left">
+          <span>
+            <mat-checkbox [(ngModel)]="element.isEnabled" color="primary">Enabled</mat-checkbox>
+          </span>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="control">
+      <th mat-header-cell *matHeaderCellDef>Control Type</th>
+      <td mat-cell *matCellDef="let element" style="cursor:pointer;color:darkblue" align="left">
+        <span>
+          <input matInput name="controlMode" type="number" [(ngModel)]="element.controlType" min="0" max="3" placeholder="Control Mode" class="input-area"/>
+        </span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="port">
+      <th mat-header-cell *matHeaderCellDef>Port Number</th>
+      <td mat-cell *matCellDef="let element" style="cursor:pointer;color:darkblue" align="left">
+        <span>
+          <input matInput name="port" type="number" min="0" [(ngModel)]="element.gopPort" placeholder="Antenna Port" class="input-area"/>
+      </span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="transmitPower">
+        <th mat-header-cell *matHeaderCellDef>Transmit Power</th>
+        <td mat-cell *matCellDef="let element" align="left">
+          <span>
+            <input matInput name="transmitPower" type="number" [(ngModel)]="element.transmitPower" placeholder="Transmit Power" class="input-area"/>
+        </span>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="sensitivity">
+        <th mat-header-cell *matHeaderCellDef>Sensitivity</th>
+        <td mat-cell *matCellDef="let element" class="link" align="left">
+          <span>
+            <input matInput name="sensitivity" type="number" [(ngModel)]="element.sensitivity" placeholder="Sensitivity" class="input-area"/>
+          </span>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef>Location</th>
+      <td mat-cell *matCellDef="let element" class="link" align="left">
+        <div *ngIf="element.locationId">
+          <span  class="input-area" (click)="showLocation(element.locationId,element)">Assigned</span>
+          <span><mat-icon class="icon" (click)="removeLocation(element)">delete</mat-icon></span>
+        </div>
+        </td>
+  </ng-container>
+    <ng-container matColumnDef="action" >
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element" class="link">
+        <span *ngIf="deviceConfiguration==false" (click)="removeAntenna(element)"><mat-icon>delete</mat-icon></span>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;let i = index; " [ngClass]="{rowcolor: i % 2 == 0 }" (drop)="drop($event, row)" (dragover)="allowDrop($event)"></tr>
+</table>

@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Edit: {{ data.entity.name }} </h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill" style="display: block;">
+      <input matInput type="text" required name="name" placeholder="Please specify name" [(ngModel)]="data.entity.name" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>Tag ID</mat-label>
+      <input type="text"
+             placeholder="Enter tag ID"
+             aria-label="Tag ID"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto"
+             [(ngModel)]="data.entity.tagid"
+             >
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.tagId" (onSelectionChange)="getSelected(option)">
+          {{option.tagId}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="display: block;" *ngFor="let attribute of data.entity.attributes" >
+      <mat-label>{{attribute.name}}</mat-label>
+      <input *ngIf="attribute.type =='Number'" required="{{attribute.required}}" matInput name={{attribute.name}}   type="number" placeholder="Please specify {{attribute.name}}" [(ngModel)]="attribute.value" />
+      <input *ngIf="attribute.type =='String'" required="{{attribute.required}}" matInput name={{attribute.name}}   type="text" placeholder="Please specify {{attribute.name}}" [(ngModel)]="attribute.value" />
+      <input *ngIf="attribute.type =='Date'" required="{{attribute.required}}" matInput name={{attribute.name}}   type="date" placeholder="Please specify {{attribute.name}}" [(ngModel)]="attribute.value" />
+      <mat-select *ngIf="attribute.type =='Selections'" matInput name={{attribute.name}}  placeholder="Please specify {{attribute.name}}" [(ngModel)]="attribute.value" >
+        <mat-option *ngFor="let value of attribute.selections" [value]="value">{{value}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Close</button>
+    <button mat-raised-button (click)="onSave()">Save</button>
+  </div>
+

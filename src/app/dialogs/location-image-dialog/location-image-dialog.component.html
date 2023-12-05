@@ -1,0 +1,10 @@
+<div MatDialog >
+  <div style="font-size: 2em;padding:10px">{{data.location.name}}
+    <button mat-icon-button primary (click)="savePosition()"><mat-icon >save</mat-icon></button>
+    <button mat-icon-button (click)="closeDialog()"><mat-icon >close</mat-icon></button>
+  </div>
+<div *ngIf="data.sub_title">{{data.sub_title}}</div>
+<div mat-dialog-content *ngIf="base64"><canvas #canvas (mousedown)="drawPosition($event)"></canvas></div>
+<div mat-dialog-content *ngIf="!base64">No image provided for the location</div>
+</div>
+

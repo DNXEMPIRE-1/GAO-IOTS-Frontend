@@ -1,0 +1,39 @@
+<div MatDialog>
+  <div mat-dialog-content>
+    <div appearance="fill" style="display: block;padding:5px" >
+      <span class="profile-title">Name: </span><span class="profile-text">{{entityTimeData.entityName}} </span>
+      <span class="profile-title">Tag ID:</span><span class="profile-text"> {{entity.tagid}}</span>
+      <span class="profile-title" *ngIf="entity.image"><img src={{entity.image}} class="image-cell"></span>
+    </div>
+    <div appearance="fill" style="display: block;padding:5px" *ngFor="let attribute of entity.attributes" align="left">
+      <span class="profile-title">{{attribute.name}}:</span><span class="profile-text">{{attribute.value }}</span>
+    </div>
+    <div align="left">
+      <mat-form-field appearance="fill" style="width:35%;padding:5px">
+        <mat-label>Event Date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="date" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="width:35%;padding:5px">
+        <input matInput type="time" required name="time" placeholder="Please specify a time" [(ngModel)]="time" />
+      </mat-form-field>
+    </div>
+        <div align="left">
+          <mat-form-field appearance="fill" style="width:35%;padding:5px">
+            <mat-select matInput name="Event Type"  placeholder="Event type" [(ngModel)]="eventType" >
+              <mat-option [value]="1" selected>Enter</mat-option>
+              <mat-option [value]="2">Exit</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" style="width:40%;padding:5px">
+            <input matInput type="text" required name="location" placeholder="Please specify a location" [(ngModel)]="locationName" />
+          </mat-form-field>
+        </div>
+        <div class="text-danger">{{status}}</div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Close</button>
+    <button mat-raised-button (click)="addEvent()">Save Event</button>
+  </div>
+</div>

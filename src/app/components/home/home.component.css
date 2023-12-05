@@ -1,0 +1,127 @@
+.homepage-header {
+  position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        font-family: Arial, sans-serif;
+  z-index: 1000;
+}
+.home-spacer {
+  flex: 1 1 auto;
+}
+.home-icon {
+  background: transparent;
+  border: 0;
+  color: white;
+}
+.homepage-top {
+
+  color: white;
+  width: 100%;
+    position: absolute;
+    z-index: 0;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.header-content {
+  position: relative;
+  top: 0px;
+  overflow: hidden;
+    position: relative;
+    height: 420px;
+    background-color: #3f51b5;
+    font-family: Arial, sans-serif;
+}
+.login-button{
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  border-radius: 5px;
+  background-color: white;
+  width: 100px;
+  height: 35px;
+}
+.homepage-content
+{
+    align-items: center;
+    display: flex;
+
+    padding: 1px;
+    width: 100%;
+    max-width: 1080px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+}
+.homepage-row
+{
+  display: flex;
+  flex-direction: row;
+  margin: 50px 0;
+  width: 100%;
+
+}
+.homepage-row-column
+{
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  margin: 0 0 24px;
+  padding: 10px;
+}
+
+.homepage-row-column h2 {
+  font-size: 25px;
+  font-weight: 400;
+  margin: 0 0 16px;
+  padding: 0;
+}
+.wrap-input100 {
+
+  border: 0;
+
+  background-color: #3f51b5;
+}
+.input100 {
+
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  color: #1b3815;
+  line-height: 1.2;
+
+  width: 230px;
+  height: 35px;
+  background: #ebebeb;
+  border-radius: 10px;
+  padding: 0 5px 0 5px;
+}
+
+.homepage-row-column
+{
+  font-size: 16px;
+}
+.homepage-content
+{
+  width: 100%;
+
+}
+.home-title{
+  font-size:xxx-large;
+  text-shadow: 4px 4px black;
+  font-weight:bold;
+  font-family: Arial, sans-serif;
+}
+.login100-form
+{
+  padding-top: 20px;
+}
+
+.example-button {
+
+  margin: 10px;
+  font-size: 16px;
+  border: 0;
+}
+::ng-deep .mat-tooltip {
+  font-size: 15px;
+}

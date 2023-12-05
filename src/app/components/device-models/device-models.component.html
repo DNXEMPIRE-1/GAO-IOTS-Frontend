@@ -1,0 +1,27 @@
+<div class="container" >
+  <div style="text-align: center;font-size: x-large;padding:10px"> Device Model Management </div>
+  <div *ngIf="!status">
+    <div style="padding: 20px;border-bottom: 1px solid #000;">
+      <span class="spacer"></span>
+      <button class="btn btn-primary" (click)="newDeviceModel()">
+        New Device Model   </button>
+    </div>
+    <div class="content" role="main">
+      <mat-drawer-container autosize>
+        <mat-list style="width: 100%;" class="rfid-class1">
+          <mat-list-item align="left" style="border-bottom: 1px solid #000;" class="mat-list-option" *ngFor="let item of deviceModelList; let even=even;"
+          [ngStyle]="{backgroundColor: even==true ? '#e9ecef': '#fff'}">
+                <span style="font-size: large;color:black;font-weight: bold;" matLine (click)="updateDeviceModel(item)">{{item.name}} </span>
+                <span matLine (click)="updateDeviceModel(item)">{{item.createDate}}</span>
+                <button mat-icon-button (click)="onDeleteDeviceModel(item)">
+                    <mat-icon color="primary">delete</mat-icon>
+                </button>
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+        </mat-list>
+      </mat-drawer-container>
+    </div>
+  </div>
+<div *ngIf="status" class="errorMessage">{{ status}} </div>
+

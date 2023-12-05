@@ -1,0 +1,26 @@
+.container
+{
+    white-space: nowrap; /*Prevents Wrapping*/
+
+    width: 100%;
+    height: 130px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.slide
+{
+    display: inline-block; /*Display inline and maintain block characteristics.*/
+    vertical-align: top; /*Makes sure all the divs are correctly aligned.*/
+    white-space: normal; /*Prevents child elements from inheriting nowrap.*/
+    border: 1px solid #888;
+    border-radius: 5px;
+    width: 200px;
+    height: 100px;
+    margin: 5px;
+}
+.location-item {
+  width: 200px;
+  height: 100px;
+  font-size: 18px;
+  color: blue;
+}

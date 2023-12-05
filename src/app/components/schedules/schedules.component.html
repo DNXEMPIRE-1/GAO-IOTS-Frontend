@@ -1,0 +1,90 @@
+
+<div>
+  <div style="padding-top:20px">
+    <div><span style="font-size:20px;font-weight:bold">Schedule Management</span>
+      <button mat-icon-button (click)="backHome()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<mat-tab-group *ngIf="!status">
+  <mat-tab label="Weekly Schedule">
+    <app-weekly-schedule [permissions]="permissions"></app-weekly-schedule>
+  </mat-tab>
+  <mat-tab label="Manage Calendar">
+    <div class="float-container">
+      <div class="float-child">
+            <div align="left">
+              <mat-form-field  appearance="fill" class="example-form-field">
+                <mat-label class="calendar-area">Choose a date</mat-label>
+                <input class="calendar-area" matInput [matDatepicker]="datepicker" required [(ngModel)]="calendarSchedule.date">
+                <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                <mat-datepicker #datepicker>
+                  <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Cancel</button>
+                    <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                  </mat-datepicker-actions>
+                </mat-datepicker>
+              </mat-form-field>
+              <mat-icon (click)="!name.errors && save()" style="color:#888;padding:20px" matTooltip="Save...">save</mat-icon>
+              <mat-icon (click)="clear()" style="color:#888;padding:20px;font-weight: bold;"  matTooltip="New schedule...">add</mat-icon>
+
+
+            </div>
+            <div>
+              <div align="left" class="text-danger" *ngIf="name.errors?.['required']">schedule name is required !</div>
+                <mat-form-field appearance="fill" style="display: block;">
+                  <mat-label class="reportfield">Schedule Name</mat-label>
+                  <input matInput name="name" type="text" required minlength="2"  placeholder="schedule name"  [(ngModel)]="calendarSchedule.name" #name="ngModel"/>
+                </mat-form-field>
+            </div>
+            <div align="left">
+              <div align="left" class="text-danger" *ngIf="permission.errors?.['required']">Select a permission item</div>
+                    <mat-form-field appearance="fill" style="padding-right:10px">
+                      <mat-label>From</mat-label>
+                      <input matInput name="timefrom" type="time"  required minlength="2"
+                      placeholder="Time from"  [(ngModel)]="timeRange.from" style="font-size:18px"/>
+                    </mat-form-field>
+                  <mat-form-field appearance="fill" style="padding-right:10px">
+                    <mat-label>To</mat-label>
+                    <input matInput name="timeend" type="time" required minlength="2"  style="font-size:18px"
+                           placeholder="Time to"  [(ngModel)]="timeRange.end"/>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill" style="padding-right:10px">
+                    <mat-label class="reportfield">Control Action</mat-label>
+                      <mat-select [(ngModel)]="selectedPermission" required #permission="ngModel">
+                        <mat-option *ngFor="let item of permissions" [value] = item >{{item.name}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                  <mat-icon (click)="permission.valid && addAction()" >add</mat-icon>
+              </div>
+
+              <div align="left" style="padding:10px">
+                <mat-list role="list">
+                  <mat-list-item *ngFor="let item of calendarSchedule.actions" role="listitem">
+                    <span class="calendar-action" *ngIf="item.permission"> {{item.permission.name}}: {{item.timeRange.from}} - {{item.timeRange.end}}</span>
+                    <span class="calendar-action-delete" (click)="removeAction(item)"  >X</span>
+                  </mat-list-item>
+                </mat-list>
+              </div>
+            </div>
+      </div>
+      <div class="float-child">
+          <h2>Calendar Schedules</h2>
+        <div *ngFor="let item of calendarSchedules" class="text-box" style="cursor: pointer;"
+              (click)="editSchedule(item)"
+              [ngClass]="{ 'selected-schedule': calendarSchedule === item }"
+              >
+          {{item.date | date: 'fullDate'}} | {{item.name}}  <mat-icon (click)="onDeleteSchedule(item)">delete</mat-icon>
+        </div>
+      </div>
+   </mat-tab>
+
+
+</mat-tab-group>
+<p style="color:blue">{{message}}</p>
+<div *ngIf="status" class="errorMessage">{{ status}} </div>
+
+
+

@@ -1,0 +1,8 @@
+<div MatDialog>
+  <h1 mat-dialog-title>Confirmation</h1>
+  <div mat-dialog-content>{{data}}</div>
+  <div md-dialog-actions style="padding:20px">
+    <button class="btn btn-primary"  style="margin:20px" (click)="dialogRef.close(true)">Confirm</button>
+    <button class="btn btn-primary" style="margin:20px" (click)="dialogRef.close(false)">Cancel</button>
+  </div>
+</div>

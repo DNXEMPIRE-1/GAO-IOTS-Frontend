@@ -1,0 +1,121 @@
+.searchSelect 				{
+  font-size:15px;
+  padding:5px;
+  display: inline-block;
+  width:150px;
+  height: 40px;
+  border:none;
+  text-align: left;
+}
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+.searchInput 				{
+  font-size:14px;
+  display: inline-block;
+  width:200px;
+  border:none;
+  text-align: left;
+}
+.searchInput:focus 		{ outline:none; }
+
+/* LABEL ======================================= */
+.label 				 {
+  color:#999;
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+.searchInput:focus ~ label, input:valid ~ label 		{
+  top:-20px;
+  font-size:12px;
+  color:#5264AE;
+
+}
+.mat-paginator {
+  display: inline-block;
+  width: 400px;
+  font-size:12px;
+}
+.ellipsis {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all .2s linear;
+  white-space: nowrap;
+  padding:.5rem 1rem;
+}
+.ellipsis:focus, .ellipsis:hover {
+color:transparent;
+}
+.ellipsis:focus:after,.ellipsis:hover:after{
+  content:attr(title);
+  overflow: visible;
+  text-overflow: inherit;
+  background: #fff;
+  position: absolute;
+  left:auto;
+  top:auto;
+  width: auto;
+  max-width: 20rem;
+  border: 1px solid #eaebec;
+  padding: 0 .5rem;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.28);
+  white-space: normal;
+  word-wrap: break-word;
+  display:block;
+  color:black;
+  margin-top:-1.25rem;
+}
+.data-row {
+  margin: 5px;
+  padding: 5px;
+  height: 60px;
+  cursor: pointer;
+}
+.data-hours {
+  margin: 5px;
+  padding: 5px;
+  height: 60px;
+  color: #000;
+}
+.data-error {
+  margin: 5px;
+  padding: 5px;
+  height: 60px;
+  color:red;
+}
+.add-row {
+  margin: 10px;
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.image-cell {
+  height: 30px;
+  width: 30px;
+  margin-bottom: 10px;
+  border-radius: 100%;
+}
+.data-header {
+  padding-top: 20px;
+  border-bottom: solid 1px #ccc;
+  color: #888;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  background: white;
+  font-size: 16px;
+}
+.evencolor {
+  background-color: #5264AE;
+}

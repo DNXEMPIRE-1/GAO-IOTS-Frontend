@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>Field details</h1>
+<div mat-dialog-content>
+	<mat-form-field appearance="fill" style="display: block;">
+		<mat-label>Name</mat-label>
+		<input matInput name="name" type="text" required minlength="1" [(ngModel)]="data.name" #name="ngModel"/>
+    <span class="text-danger" *ngIf="(name.touched) && name.errors?.['required']">name is required !</span>
+	</mat-form-field>
+	<mat-form-field appearance="fill" style="display: block;">
+		<mat-label>Type</mat-label>
+		<mat-select [(ngModel)]="data.type">
+			<mat-option *ngFor="let type of types" [value]="type">
+				{{type}}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+	<p>
+		<mat-checkbox [(ngModel)]="data.required">Required</mat-checkbox>
+	</p>
+	<p>
+		<mat-form-field appearance="fill" style="display: block;" *ngIf="data.type == 'Selections'">
+			<mat-label>Options</mat-label>
+			<mat-chip-list #chipList aria-label="option selection">
+			<mat-chip
+				*ngFor="let option of data.selections"
+				[selectable]="true"
+				[removable]="true"
+				(removed)="removeOption(option)">
+				{{option}}
+				<mat-icon matChipRemove>cancel</mat-icon>
+			</mat-chip>
+			<input
+				placeholder="New option..."
+				#optionInput
+				[matChipInputFor]="chipList"
+				[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+				(matChipInputTokenEnd)="addOption($event)">
+			</mat-chip-list>
+		</mat-form-field>
+	</p>
+</div>
+<div mat-dialog-actions>
+	<button mat-raised-button (click)="onNoClick()">Close</button>
+</div>

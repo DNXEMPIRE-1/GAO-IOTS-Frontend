@@ -1,0 +1,16 @@
+<ng-container *ngIf="rfidObject == null">
+<mat-list style="width: 100%;padding: 10px" class="rfid-class1">
+  <mat-list-item style="border-bottom: 1px solid #000;" class="mat-list-option" *ngFor="let item of items">
+      <mat-icon mat-list-icon color="primary" (click)="rfidObject = item">arrow_back</mat-icon>
+      <h3 style="font-size: x-large;" matLine (click)="rfidObject = item">{{item.name}}
+        <span *ngIf="item.entityCount>0" (click)="rfidObject = item">( {{item.entityCount}} entities )</span>
+      </h3>
+      <span style="font-size: small;" matLine (click)="rfidObject = item">{{item.description}}</span>
+
+  </mat-list-item>
+  <mat-divider></mat-divider>
+</mat-list>
+</ng-container>
+<ng-template [ngIf]="rfidObject != null">
+	<app-entity-list-view [rfidObject]="rfidObject"></app-entity-list-view>
+</ng-template>

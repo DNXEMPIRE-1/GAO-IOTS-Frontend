@@ -1,0 +1,39 @@
+<div style="padding:5px"><h1 mat-dialog-title>Email Registration </h1></div>
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill" style="display: block;">
+      <div>
+      <mat-label>First Name</mat-label>
+      <input matInput name="firstname" type="text" required minlength="1"  [(ngModel)]="emailuser.firstname"
+                #firstname="ngModel"/>
+                <span class="text-danger" *ngIf="firstname.errors?.['required']">Please provide a first name</span>
+            </div>
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="display: block;">
+      <div>
+        <mat-label>Last Name</mat-label>
+        <input matInput name="lastname" type="text" required minlength="1"  [(ngModel)]="emailuser.lastname"
+          #lastname="ngModel" />
+          <span class="text-danger" *ngIf="lastname.errors?.['required']">Please provide a last name</span>
+      </div>
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="display: block;">
+      <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter email">
+      <mat-label>Email</mat-label>
+      <input matInput name="email" type="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+      required minlength="2" placeholder="Please enter email" [(ngModel)]="emailuser.email" #email="ngModel"/>
+      <span class="text-danger" *ngIf="email.errors?.['pattern']">Please provide a valid email address</span>
+      <span class="text-danger" *ngIf="email.errors?.['required']">Email is required</span>
+      </div>
+    </mat-form-field>
+      <mat-form-field appearance="fill" style="display: block;">
+        <mat-label>Registration Date</mat-label>
+        <input matInput name="addtime" type="text"  readonly placeholder="add date/time"  [(ngModel)]="emailuser.registrationDate" />
+      </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Close</button>
+    <button mat-raised-button (click)="updateEmailuser()">Save</button>
+  </div>
+
+

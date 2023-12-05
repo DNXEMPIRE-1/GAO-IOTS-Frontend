@@ -1,0 +1,47 @@
+<div align="left" style="margin:20px 20px">
+  <mat-form-field appearance="fill" style="padding-right:10px">
+  <mat-label class="reportfield">Select Group</mat-label>
+  <mat-select [(ngModel)]="selectedGroup" (selectionChange)="showGroup()" class="reportfield">
+    <mat-option *ngFor="let item of groups" [value] = item >{{item.name}}</mat-option>
+  </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="padding-right:10px">
+    <mat-label class="reportfield">Select Entity Type</mat-label>
+    <mat-select [(ngModel)]="selectedType" (selectionChange)="showEntity()" class="reportfield">
+      <mat-option *ngFor="let item of objTypes" [value] = item >{{item.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-icon-button (click)="onSave()">
+    <mat-icon color="primary">save</mat-icon>
+  </button>
+</div>
+<div class="example-container" >
+  <h2>Members <span *ngIf="selectedGroup">of {{selectedGroup.name}}</span></h2>
+  <div
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="groupMembers"
+    [cdkDropListConnectedTo]="[doneList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box" style="cursor: pointer;" *ngFor="let item of groupMembers" >
+        <span>{{item.name}}</span>
+        <span><mat-icon (click)="removeMember(item)" matTooltip="remove from the group">delete</mat-icon></span>
+    </div>
+  </div>
+</div>
+
+<div class="example-container">
+  <h2>Entities <span *ngIf="selectedType">of {{selectedType.name}}</span></h2>
+
+  <div
+    cdkDropList
+    #doneList="cdkDropList"
+    [cdkDropListData]="entities"
+    [cdkDropListConnectedTo]="[todoList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let item of entities" cdkDrag>{{item.name}}</div>
+  </div>
+</div>
+<div style="color:blue">{{message}}</div>

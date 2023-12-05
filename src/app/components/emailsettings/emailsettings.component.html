@@ -1,0 +1,41 @@
+<div class="container" >
+  <div style="text-align: center;font-size: x-large;padding:10px"> Email Settings </div>
+  <div *ngIf="!status" style="padding: 20px;border-bottom: 1px solid #000;">
+    <span class="spacer"></span>
+    <button class="btn btn-primary" (click)="createEmailuser()">
+      New Email
+    </button>
+    <button class="btn btn-primary" (click)="smtpServerConfig()" style="margin-left:20px">
+      SMTP Server
+    </button>
+  </div>
+  <ng-container >
+    <table *ngIf="dataSource != null" mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+      <ng-container matColumnDef="firstname">
+          <th mat-header-cell *matHeaderCellDef>First Name</th>
+          <td mat-cell *matCellDef="let element" (click)="updateEmailuser(element)" style="cursor:pointer;color:darkblue" align="left"> {{element.firstname}} </td>
+      </ng-container>
+      <ng-container matColumnDef="lastname">
+          <th mat-header-cell *matHeaderCellDef>Last Name</th>
+          <td mat-cell *matCellDef="let element" (click)="updateEmailuser(element)" style="cursor:pointer;color:darkblue" align="left"> {{element.lastname}} </td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let element" (click)="updateEmailuser(element)" style="cursor:pointer;color:darkblue" align="left"> {{element.email}} </td>
+    </ng-container>
+      <ng-container matColumnDef="registrationDate">
+        <th mat-header-cell *matHeaderCellDef> Registration Date </th>
+        <td mat-cell *matCellDef="let element" (click)="updateEmailuser(element)" class="link" align="left"> {{element.registrationDate | date:'medium' }} </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell *matCellDef="let element" (click)="onDeleteEmailuser(element)" class="link"><span style="cursor: pointer;">X</span></td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+  </table>
+
+  </ng-container>
+  <div *ngIf="status !=''" class="errorMessage">{{ status}} </div>
+</div>
+

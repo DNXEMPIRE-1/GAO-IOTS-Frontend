@@ -1,0 +1,64 @@
+<div style="padding:5px"><h1 mat-dialog-title>Tag Registration </h1></div>
+  <div mat-dialog-content>
+    <div align="left">
+      <span class="text-danger" *ngIf="tagid.errors?.['required']">Tag ID is required</span>
+    </div>
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>Tag ID</mat-label>
+      <input matInput name="tagid" type="text" required minlength="2" placeholder="Tag ID" [(ngModel)]="tag.tagId" #tagid="ngModel"/>
+    </mat-form-field>
+    <div *ngIf="location" align="left">
+      <button mat-raised-button (click)="removeLocation()">Remove Location:</button>
+      <span style="margin-left:20px">{{location.name}}</span>
+      <span *ngIf="location.image || location.useParentImage===true" style="margin-left:20px">
+        <mat-icon (click)="showImage(location)" class="icon">image</mat-icon>
+      </span>
+    </div>
+    <mat-form-field appearance="fill" style="display: block;" (click)="selectLocation=!selectLocation">
+      <mat-label >Select location...</mat-label>
+      <input type="text"
+             placeholder="Select a location"
+             aria-label="location name"
+             matInput
+             readonly
+             >
+    </mat-form-field>
+    <app-location-selection  *ngIf="selectLocation" [tag] = "tag" (locationSelected)="onLocationSelected($event)" (closeSelectEvent)="selectLocation=false">
+    </app-location-selection>
+
+    <div *ngIf="!selectLocation">
+      <div *ngIf="entity" align="left">
+        <button mat-raised-button (click)="removeEntity()">Remove Entity:</button>
+         {{entity.name}}
+      </div>
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>Select entity...</mat-label>
+      <input type="text"
+             placeholder="Enter an entity name"
+             aria-label="entity name"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto"
+             >
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name" (onSelectionChange)="getSelected(option)">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+      <mat-form-field appearance="fill" style="display: block;">
+        <mat-label>Activation Date</mat-label>
+        <input matInput name="activation" type="date"  minlength="2" placeholder="Please specify activation date" [(ngModel)]="tag.activationDate" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="display: block;">
+        <mat-label>Expiration Date</mat-label>
+        <input matInput name="expiration" type="date"  minlength="2" placeholder="Please specify expiration date" [(ngModel)]="tag.expirationDate" />
+      </mat-form-field>
+      <div style="padding:10px">Registration Date: {{tag.registrationDate | date: 'fullDate'}}</div>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Close</button>
+    <button mat-raised-button (click)="!tagid.errors&&updateTag()">Save</button>
+  </div>
+

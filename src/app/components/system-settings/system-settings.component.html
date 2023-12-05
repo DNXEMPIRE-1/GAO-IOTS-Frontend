@@ -1,0 +1,36 @@
+<div class="main-content">
+  <div class="row">
+      <div style="padding-top:20px">
+        <div><span style="font-size:20px;font-weight:bold">System Settings</span>
+          <button mat-icon-button (click)="backHome()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+    <div *ngIf="!status">
+        <div class="wrapper top-section">
+          <nav class="hright dnav">
+            <ul>
+              <li  routerLinkActive="active"><a (click)="viewType='userList'" style="cursor:pointer">System Users</a></li>
+              <li  routerLinkActive="active"><a (click)="viewType='rfidobjects'" style="cursor:pointer">Entity Types</a></li>
+              <li  routerLinkActive="active"><a (click)="viewType='locationprop'" style="cursor:pointer">Location Types</a></li>
+              <li  routerLinkActive="active"><a (click)="viewType='devicemodels'" style="cursor:pointer">Device Models</a></li>
+              <li  routerLinkActive="active"><a (click)="viewType='emailsettings'" style="cursor:pointer">Email & SMTP Settings</a></li>
+              <li  routerLinkActive="active"><a (click)="viewType='parameters'" style="cursor:pointer">Parameters</a></li>
+              <li  routerLinkActive="active"><a routerLink="/dashboard">IoT Engine</a></li>
+              <li  routerLinkActive="active"><a routerLink="/dashboard">Refresh Device DB</a></li>
+              <li  routerLinkActive="active"><a routerLink="/dashboard">License Management</a></li>
+            </ul>
+          </nav>
+        </div>
+      <app-user-list-view *ngIf="viewType=='userList'"></app-user-list-view>
+      <app-rfid-objects *ngIf="viewType=='rfidobjects'"></app-rfid-objects>
+      <app-locationprops *ngIf="viewType=='locationprop'"></app-locationprops>
+      <app-device-models *ngIf="viewType=='devicemodels'"></app-device-models>
+      <app-emailsettings *ngIf="viewType=='emailsettings'"></app-emailsettings>
+      <app-parameters *ngIf="viewType=='parameters'"></app-parameters>
+  </div>
+  <div *ngIf="status" class="errorMessage">{{ status}} </div>
+</div>
+
+

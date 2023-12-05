@@ -1,0 +1,21 @@
+<ng-container >
+  <h2>{{title}}</h2>
+  <button mat-icon-button (click)="newGroup()" color="primary">
+    Create New Group <mat-icon>create_new_folder</mat-icon>
+  </button>
+  <mat-list style="width: 100%;padding: 10px" class="rfid-class1">
+    <mat-list-item style="border-bottom: 1px solid #000;" class="mat-list-option" *ngFor="let item of groups">
+        <mat-icon mat-list-icon color="primary" (click)="update(item)">arrow_back</mat-icon>
+        <h3 style="font-size: x-large;" matLine (click)="update(item)">{{item.name}}
+          <span *ngIf="item.count>0" (click)="selected = item">( {{item.count}} entities )</span>
+        </h3>
+        <span style="font-size: small;" matLine (click)="selected = item">{{item.description}}</span>
+        <button mat-icon-button (click)="onDelete(item)">
+          <mat-icon color="primary">delete</mat-icon>
+      </button>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+</ng-container>
+
+

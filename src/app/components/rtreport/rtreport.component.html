@@ -1,0 +1,52 @@
+<div style="padding-top:20px">
+  <div><span style="font-size:20px;font-weight:bold">Real-Time Reports</span>
+    <button mat-icon-button (click)="backHome()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+<div *ngIf="!status">
+  <div align="left" style="padding:10px">
+    <mat-form-field appearance="fill" style="padding-right:10px">
+      <mat-label class="reportfield">Select a period</mat-label>
+      <mat-select [(ngModel)]="period" (selectionChange)="refresh()" class="reportfield">
+        <mat-option *ngFor="let item of periods" [value] = item >{{item.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="date-field" *ngIf="period.period==-1">
+      <mat-label class="reportfield">Choose a date</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+      <input matStartDate placeholder="Start date" [(ngModel)]="startDate" class="reportfield">
+      <input matEndDate placeholder="End date" [(ngModel)]="endDate" class="reportfield">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+   </mat-form-field >
+    <span class="spacer"></span>
+    <mat-form-field appearance="fill" style="padding-right:10px">
+      <mat-label class="reportfield">Select a location</mat-label>
+      <mat-select [(ngModel)]="location" (selectionChange)="refresh()" class="reportfield">
+        <mat-option *ngFor="let item of locations" [value] = item >{{item.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <span *ngIf="activeNumber > 0" style="color:blue;">Active: {{activeNumber}}</span>
+  </div>
+  <div *ngIf="location" >
+    <h2>{{location.name}}</h2>
+    <div *ngIf="location.image" style="padding: 5px;">
+      <div mat-dialog-content ><canvas #canvas class="location-image"></canvas></div>
+    </div>
+  </div>
+  <div class="chart" style="padding: 5px;">
+    <canvas baseChart
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [options]="lineChartOptions"
+      [legend]="lineChartLegend"
+      [type]="lineChartType"
+      [plugins]="lineChartPlugins">
+    </canvas>
+  </div>
+</div>
+<div *ngIf="status !=''" class="errorMessage">{{ status}} </div>
+

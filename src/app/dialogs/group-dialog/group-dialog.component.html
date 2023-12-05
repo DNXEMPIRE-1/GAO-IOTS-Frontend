@@ -1,0 +1,23 @@
+<div style="padding:20px"><h1 mat-dialog-title>{{data.title}} </h1></div>
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>Name</mat-label>
+      <input matInput name="name" id="name" type="text" required minlength="2" placeholder="Group Name" [(ngModel)]="group.name" #name="ngModel"/>
+      <span class="text-danger" *ngIf="(name.touched) &&
+      name.errors?.['required']">name is required !</span>
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>Description</mat-label>
+      <input matInput name="decription" type="text" required minlength="2" placeholder="Description" [(ngModel)]="group.description" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>Group Type</mat-label>
+      <input matInput type="text" readonly matInput name="Type"  placeholder="Please specify group type" value={{typeString}} >
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Close</button>
+    <button mat-raised-button (click)="!name.errors && update()">Save</button>
+  </div>
+
+

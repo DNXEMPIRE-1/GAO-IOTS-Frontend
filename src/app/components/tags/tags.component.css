@@ -1,0 +1,11 @@
+.mat-header-cell
+{
+  background-color: darkblue;
+  color: white;
+  font-size: large;
+}
+.mat-paginator {
+  display: inline-block;
+  width: 400px;
+  font-size:12px;
+}

@@ -1,0 +1,159 @@
+<app-header (click)="setPanelName('dashboard')"></app-header>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened="true" style="width: 220px;">
+    <mat-nav-list>
+      <mat-list-item (click)="setPanelName('dashboard')">
+        <mat-icon>dashboard</mat-icon><span class="sidemenu">Dashboard</span>
+      </mat-list-item>
+      <hr style="width: 90%; margin: 0 auto" />
+      <mat-list-item (click)="setPanelName('rfiddevices')">
+        <mat-icon>settings_input_antenna</mat-icon><span class="sidemenu">Manage Devices</span>
+      </mat-list-item>
+      <mat-list-item (click)="setPanelName('rfidtags')">
+        <mat-icon>bluetooth</mat-icon><span class="sidemenu">Manage Tags</span>
+      </mat-list-item>
+      <mat-list-item (click)="setPanelName('locations')">
+        <mat-icon>store</mat-icon><span class="sidemenu">Manage Locations</span>
+      </mat-list-item>
+      <mat-expansion-panel >
+        <mat-expansion-panel-header class="sidemenu">
+          <span class="sidemenu">Manage Entities</span>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <mat-list-item (click)="setPanelName('rfidentities')">
+            <mat-icon>supervisor_account</mat-icon><span class="sidemenu">Entity, Group & Access Control</span>
+          </mat-list-item>
+          <mat-list-item (click)="setPanelName('assessment')">
+            <mat-icon>border_color</mat-icon><span class="sidemenu">Assessment & Adjustment</span>
+          </mat-list-item>
+        </mat-nav-list>
+    </mat-expansion-panel>
+      <mat-list-item (click)="setPanelName('schedules')">
+        <mat-icon>event</mat-icon><span class="sidemenu">Schedules</span>
+      </mat-list-item>
+      <mat-expansion-panel >
+        <mat-expansion-panel-header class="sidemenu">
+          <span class="sidemenu">Reports</span>
+        </mat-expansion-panel-header>
+        <mat-nav-list>
+          <mat-list-item (click)="setPanelName('reports')">
+            <mat-icon>assessment</mat-icon><span class="sidemenu">Daily Reports</span>
+          </mat-list-item>
+          <mat-list-item (click)="setPanelName('rtreport')">
+            <mat-icon>alarm</mat-icon><span class="sidemenu">Real Time</span>
+          </mat-list-item>
+          <mat-list-item (click)="setPanelName('monitor')">
+            <mat-icon>notification_important</mat-icon><span class="sidemenu">Event Monitor</span>
+          </mat-list-item>
+        </mat-nav-list>
+    </mat-expansion-panel>
+	  <hr style="width: 90%; margin: 0 auto" />
+    <mat-list-item (click)="setPanelName('settings')" *ngIf="isAdmin===true">
+      <mat-icon>settings</mat-icon><span class="sidemenu">System Configuration</span>
+    </mat-list-item>
+	  <mat-list-item routerLink="/logout">
+      <mat-icon>logout</mat-icon><span class="sidemenu">Logout</span>
+    </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+  <div class="main-content" style="height: 88vh">
+     <!-- User data -->
+    <div class="container" *ngIf="getPanelName==='dashboard'">
+      <div class="welcome-msg pt-3 pb-4">
+        <h1 (click)="setPanelName('userprofile')" style="color:#26579c;cursor: pointer;">{{user.name}}</h1>
+        <p>Logged in as [{{user.authorities}}] </p>
+      </div>
+      <div class="flex-me">
+        <mat-card (click)="setPanelName('rfiddevices')">
+          <mat-card-header>
+            <mat-icon>settings_input_antenna</mat-icon>
+            <mat-card-title>Manage Devices</mat-card-title>
+            <mat-card-subtitle>Manage fixed and handheld devices</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+        <mat-card (click)="setPanelName('rfidtags')">
+          <mat-card-header>
+            <mat-icon>bluetooth</mat-icon>
+            <mat-card-title>Manage Tags</mat-card-title>
+            <mat-card-subtitle>Assign tags to users and assets</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+        <mat-card (click)="setPanelName('locations')">
+          <mat-card-header>
+            <mat-icon>store</mat-icon>
+            <mat-card-title>Manage Locations</mat-card-title>
+            <mat-card-subtitle>Configurate location type & property</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+        <mat-card (click)="setPanelName('rfidentities')">
+          <mat-card-header>
+            <mat-icon>supervisor_account</mat-icon>
+            <mat-card-title>Manage Entities</mat-card-title>
+            <mat-card-subtitle>Configure entity, group and access control</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+        <mat-card (click)="setPanelName('assessment')">
+          <mat-card-header>
+            <mat-icon>border_color</mat-icon>
+            <mat-card-title>Time Assessment</mat-card-title>
+            <mat-card-subtitle>Time Review and Adjustment</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+        <mat-card (click)="setPanelName('schedules')">
+          <mat-card-header>
+            <mat-icon>event</mat-icon>
+            <mat-card-title>Schedule Management</mat-card-title>
+            <mat-card-subtitle>Setup schedules for access control</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+        <mat-card (click)="setPanelName('reports')">
+          <mat-card-header>
+            <mat-icon>assessment</mat-icon>
+            <mat-card-title>Daily Reports</mat-card-title>
+            <mat-card-subtitle>View daily and history reports</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+        <mat-card (click)="setPanelName('rtreport')">
+          <mat-card-header>
+            <mat-icon>alarm</mat-icon>
+            <mat-card-title>Real Time Reports</mat-card-title>
+            <mat-card-subtitle>Time and location based reports</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+        <mat-card (click)="setPanelName('monitor')">
+          <mat-card-header>
+            <mat-icon>notification_important</mat-icon>
+            <mat-card-title>Event Monitor</mat-card-title>
+            <mat-card-subtitle>Moniter System Activities</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+        <mat-card (click)="setPanelName('settings')" *ngIf="isAdmin===true">
+          <mat-card-header>
+            <mat-icon>settings</mat-icon>
+            <mat-card-title>System Configurations</mat-card-title>
+            <mat-card-subtitle>System setup and configurations</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </div>
+    <app-rfiddevices *ngIf="getPanelName==='rfiddevices'" (backClick)="setPanelName('dashboard')"></app-rfiddevices>
+    <app-tags *ngIf="getPanelName==='rfidtags'" (backClick)="setPanelName('dashboard')"></app-tags>
+    <app-locations *ngIf="getPanelName==='locations'" (backClick)="setPanelName('dashboard')"></app-locations>
+    <app-system-settings *ngIf="getPanelName==='settings'" (backClick)="setPanelName('dashboard')"></app-system-settings>
+    <app-rfid-entities *ngIf="getPanelName==='rfidentities'" (backClick)="setPanelName('dashboard')"></app-rfid-entities>
+    <app-reset-password *ngIf="getPanelName==='changepassword'"
+        (backClick)="setPanelName('dashboard')" [model]="user">
+    </app-reset-password>
+    <app-user-profile *ngIf="getPanelName==='userprofile'" (backClick)="setPanelName('dashboard')"></app-user-profile>
+    <app-reports *ngIf="getPanelName==='reports'" (backClick)="setPanelName('dashboard')"></app-reports>
+    <app-rtreport *ngIf="getPanelName==='rtreport'" (backClick)="setPanelName('dashboard')"></app-rtreport>
+    <app-schedules *ngIf="getPanelName==='schedules'" (backClick)="setPanelName('dashboard')"></app-schedules>
+    <app-monitor *ngIf="getPanelName==='monitor'" (backClick)="setPanelName('dashboard')"></app-monitor>
+    <app-assessment *ngIf="getPanelName==='assessment'" (backClick)="setPanelName('dashboard')"></app-assessment>
+    </div>
+</mat-sidenav-content>
+</mat-sidenav-container>
+<app-footer></app-footer>
+  <!-- //content -->
+<!-- main content end-->

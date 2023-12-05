@@ -1,0 +1,11 @@
+<mat-list style="width: 100%;padding: 10px;border-top: 1px solid #000;" class="rfid-class1">
+  <mat-list-item style="border-bottom: 1px solid #000;" class="mat-list-option" *ngFor="let item of items">
+      <mat-icon mat-list-icon color="primary" (click)="selector.emit(item)">settings_ethernet</mat-icon>
+      <h3 style="font-size: x-large;" matLine (click)="selector.emit(item)">{{item.name}}</h3>
+      <p style="font-size: small;" matLine (click)="selector.emit(item)">{{item.description}}</p>
+      <button mat-icon-button (click)="remover.emit(item)">
+         <mat-icon color="primary">delete_forever</mat-icon>
+      </button>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+</mat-list>

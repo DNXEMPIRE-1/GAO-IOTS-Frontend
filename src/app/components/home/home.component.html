@@ -1,0 +1,80 @@
+<div class="homepage-header">
+  <mat-toolbar class="mat-elevation-z8" color="primary" >
+    <a class="system-menu" routerLink="/home"><span style="color:red">GAO</span> IoTs</a>
+    <button mat-raised-button #tooltip="matTooltip" color="primary"
+          matTooltip="Under development ....."
+          [matTooltipPosition]="'below'"
+          matTooltipHideDelay="1000"
+          class="example-button">
+    Guide
+  </button>
+  <a class="system-menu" href='https://www.gaorfid.com'>Contact US</a>
+  </mat-toolbar>
+</div>
+
+<div class="header-content" >
+  <div class="homepage-top" >
+    <h1 class="home-title">{{title}}</h1>
+    <p>{{sub_title}}</p>
+    <form (ngSubmit)="loginForm.valid && validateUser(loginForm)" class="login100-form validate-form" #loginForm="ngForm"
+    *ngIf="formName==='login'">
+    <div class="form-group">
+      <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter email">
+        <input class="input100" type="email" name="email" id="email" placeholder="Email" required
+        pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+        [(ngModel)]="model.email" #email="ngModel">
+        <span class="focus-input100"></span>
+      </div>
+      <div>&nbsp;
+        <span class="text-danger" *ngIf="(email.touched || loginForm.submitted) &&
+        email.errors?.['required']">Email is required !</span>
+        <span class="text-danger" *ngIf="(email.touched || loginForm.submitted) &&
+        email.errors?.['pattern']">Please provide a valid email address !</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="wrap-input100 validate-input" data-validate="Please enter password">
+        <input class="input100" type="password" name="password" placeholder="Password" id="password" required
+        [(ngModel)]="model.password" #password="ngModel" minlength="5">
+        <span class="focus-input100"></span>
+      </div>
+      <div>&nbsp;
+          <span class="text-danger" *ngIf="(password.touched || loginForm.submitted) &&
+          password.errors?.['required']">Password is required !</span>
+          <span class="text-danger" *ngIf="(password.touched || loginForm.submitted) &&
+          password.errors?.['minlength']">Password must be at least 5 characters long. !</span>
+      </div>
+    </div>
+    <button mat-raised-button class="login-button"  (click)="panelName='login'" >Login</button>
+    <a (click)="formName='forget-password'" style="color:white;margin-left: 10px;cursor: pointer;">Forget Password?</a>
+    </form>
+    <app-forget-password *ngIf="formName==='forget-password'" (formName)="formName='login'"></app-forget-password>
+    <div *ngIf="authStatus !=''" class="text-danger">{{authStatus}}</div>
+  </div>
+</div>
+<div class="container" style="padding: 40px;">
+  <div class="row" align="left">
+    <div class="col-md-4 homepage-row-column">
+      <h2>Cloud Native</h2>
+      <p>The system is based on the Angular Framework, Spring Boot Framework and NoSQL technologies.</p>
+        <p>The system supports business module and device adapter plug-ins
+          with stateless REST web services support with JWT based authoriztation</p>
+
+    </div>
+    <div class="col-md-4 homepage-row-column">
+      <h2>Enterprise Scale</h2>
+      <p>Provide tools that help enterprises implement their own custom applications with pre-build IoT components and REST APIs.
+        <p>Customizable with customer and project dependent specifications.</p>
+
+    </div>
+    <div class="col-md-4 homepage-row-column">
+      <h2>Easy Integration</h2>
+      <p>Working closely with GAO development team to seamlessly integrate with your ERP systems.</p>
+      <p>Start from scratch or drop into your existing applications.</p>
+
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+

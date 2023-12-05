@@ -1,0 +1,80 @@
+<div style="padding:5px"><h1 mat-dialog-title> Device Configuration </h1></div>
+<div mat-dialog-content>
+  <div align="left">
+    <span class="text-danger" *ngIf="name.errors?.['required']">Please enter device name</span>
+  </div>
+  <mat-form-field appearance="fill" style="display: block;">
+    <mat-label>Device Name</mat-label>
+    <input matInput name="name" type="text" required minlength="2" placeholder="Device name" [(ngModel)]="device.name" #name="ngModel" />
+  </mat-form-field>
+  <div *ngIf="location" align="left">
+    <button mat-raised-button (click)="removeLocation()">Remove Location:</button>
+    <span style="margin-left:20px;font-size: large;">{{location.name}}</span>
+    <span *ngIf="location.image || location.useParentImage === true" style="margin-left:20px"><mat-icon (click)="showImage(location)" class="icon" >image</mat-icon></span>
+  </div>
+  <mat-form-field appearance="fill" style="display: block;" (click)="selectLocation=!selectLocation">
+    <mat-label >Select location...</mat-label>
+    <input type="text"
+           placeholder="Select a location"
+           aria-label="location name"
+           matInput
+           readonly
+           >
+  </mat-form-field>
+  <app-location-selection  *ngIf="selectLocation" [device] = "device" (locationSelected)="onLocationSelected($event)" (closeSelectEvent)="selectLocation=false">
+  </app-location-selection>
+
+  <div *ngIf="!selectLocation">
+    <div *ngIf="device.deviceModel" align="left">
+      <button mat-raised-button (click)="removeModel()">Remove Model:</button>
+      <span style="margin-left:20px;font-size: large;">{{device.deviceModel.name}}</span>
+      <span style="margin-right:20px;font-size: large;" *ngIf="device.deviceModel.driverClass" >
+        [{{device.deviceModel.driverClass | simpleClassName}}]
+      </span>
+      <button mat-raised-button (click)="showModel()">Parameters</button>
+    </div>
+    <mat-form-field appearance="fill" style="display: block;">
+    <mat-label>Select device model...</mat-label>
+    <input type="text"
+           placeholder="Enter a model name"
+           aria-label="model name"
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto"
+           >
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name" (onSelectionChange)="getSelected(option)">
+        {{option.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <app-device-model-form *ngIf="device.deviceModel && showModelDetails" [deviceModel]="device.deviceModel">
+
+  </app-device-model-form>
+    <mat-form-field appearance="fill" style="margin:1px;width:48%">
+      <mat-label>MAC Address</mat-label>
+      <input matInput name="macaddress" type="text"  minlength="2" placeholder="Please specify MAC address" [(ngModel)]="device.macAddress" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin:1px;width:48%">
+      <mat-label>IP Address</mat-label>
+      <input matInput name="ipaddress" type="text"  minlength="2" placeholder="Please specify IP Address" [(ngModel)]="device.ipAddress" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin:1px;width:48%">
+      <mat-label>Control Type: Scan, Enter, Exit</mat-label>
+      <input matInput name="controlType" type="number" min="0" max="3" placeholder="0 - Scan, 1 - Enter, 2 Exit" [(ngModel)]="device.controlType" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin:1px;width:48%">
+      <mat-label>FQDN</mat-label>
+      <input matInput name="fqdn" type="text"  minlength="2" placeholder="Please specify a fully qulified domain name" [(ngModel)]="device.fqdn" />
+    </mat-form-field>
+    <div>Registration Date: {{device.createDate | date: 'fullDate'}} </div>
+
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()">Close</button>
+  <button mat-raised-button (click)="!name.errors&&updateDevice()">Save</button>
+</div>
+<div class="text-danger" style="padding:10px">{{status}}</div>
+
+

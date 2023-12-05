@@ -1,0 +1,20 @@
+<div style="padding:20px"><h1 mat-dialog-title>Location Type Configuration </h1></div>
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>Type Name</mat-label>
+      <input matInput name="name" type="text" required minlength="2" placeholder="Parameter name" [(ngModel)]="locationType.name" #name="ngModel"/>
+      <span class="text-danger" *ngIf="(name.touched) && name.errors?.['required']">name is required !</span>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>Description</mat-label>
+      <input matInput name="value" type="text"  placeholder="Value" [(ngModel)]="locationType.description" />
+    </mat-form-field>
+    <app-rfidobject-attributes-form [attributes]="locationType.attributes" [types]="types" (creator)="addField()" (remover)="removeField($event)" (defineOptions)="defineOptions($event)"></app-rfidobject-attributes-form>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Close</button>
+    <button mat-raised-button (click)="!name.errors && updateLocationType()">Save</button>
+  </div>
+

@@ -1,0 +1,14 @@
+<div class="container">
+  <h2>Entity Type Configuration</h2>
+  <div class="content" *ngIf="!status">
+    <div  *ngIf="topic == 'default'" style="margin:10px;width:100%">
+      <button class="btn btn-primary" style="margin: 5px;" (click)="createEntity()"> New Entity Type   </button>
+    <app-rfidobject-list-view
+       style="width: 100%" [items]="items" (selector)="selectItem($event)" (remover)="removeItem($event)">
+    </app-rfidobject-list-view>
+  </div>
+      <app-rfidobject-form *ngIf="topic == 'editing'" style="width: 100%" [entity]="selectedItem"  [title]="'Edit Metadata'" [saveTitle]="'Update'" (discarder)="discardUpdate()" (saver)="update()"></app-rfidobject-form>
+      <app-rfidobject-form *ngIf="topic == 'new'" style="width: 100%" [entity]="newItem"  [title]="'Create Tracking Object'" [saveTitle]="'Create'" (discarder)="discardUpdate()" (saver)="create()"></app-rfidobject-form>
+  </div>
+  <div *ngIf="status !=''" class="errorMessage">{{ status}} </div>
+</div>

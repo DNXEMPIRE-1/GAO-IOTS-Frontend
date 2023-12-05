@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>Edit System User </h1>
+  <div mat-dialog-content>
+    <div>
+        <mat-form-field appearance="fill" style="padding:10px;width:50%">
+          <mat-label>Login ID</mat-label>
+          <input matInput name="loginid" type="text" required minlength="2" placeholder="User Name" [(ngModel)]="user.name" #name="ngModel"/>
+          <span class="text-danger" *ngIf="(name.touched) && name.errors?.['required']">name is required !</span>
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="padding:10px;width:50%">
+          <mat-label>Email</mat-label>
+          <input matInput name="email" type="text" required minlength="2" placeholder="Email" [(ngModel)]="user.email" #email="ngModel"/>
+          <span class="text-danger" *ngIf="(email.touched) && email.errors?.['required']">email is required !</span>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="fill" style="padding:10px;width:50%">
+          <mat-label>First Name</mat-label>
+          <input matInput name="firstname" type="text"  minlength="2" placeholder="Please specify first name" [(ngModel)]="user.firstname" />
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="padding:10px;width:50%">
+          <mat-label>Last Name</mat-label>
+          <input matInput name="firstname" type="text"  minlength="2" placeholder="Please specify last name" [(ngModel)]="user.lastname" />
+        </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="fill" style="padding:10px;width:50%">
+        <mat-label>Password</mat-label>
+        <input matInput name="password" type="password"  minlength="5" placeholder="Please specify password" [(ngModel)]="user.password" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="padding:10px;width:50%">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput type="password"  minlength="5" placeholder="Please confirm the password" [(ngModel)]="confirm_password"
+        name="confirm_password" required (keyup)="checkPassword()"/>
+      </mat-form-field>
+  </div>
+  <div style="color:blue">{{message}}</div>
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>User Role(s)</mat-label>
+      <input matInput name="userrole" type="text"  minlength="2" placeholder="User roles" [(ngModel)]="user.authorities" disabled/>
+    </mat-form-field>
+    <div align="left" style="padding: 10px;">
+    <mat-label>Registration date: {{user.addTime | fieldFormat}} </mat-label>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Close</button>
+    <button mat-raised-button (click)="!name.errors && !email.errors && updateUser()">Save</button>
+  </div>
+

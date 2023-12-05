@@ -1,0 +1,21 @@
+<div *ngIf="calendarSchedules && calendarSchedules.length > 0">
+  <h2>Calendar Schedules</h2>
+  <div *ngFor="let item of calendarSchedules" align="left" style="padding: 20px;">
+    <div style="padding:10px;font-size: 18px;"> {{item.name}} | {{item.date | date:'fullDate'}} </div>
+    <span class="calendar-action" *ngFor="let action of item.actions"> {{action.permission.name}} {{action.timeRange.from}} - {{action.timeRange.end}}</span>
+  </div>
+</div>
+<div *ngIf="weeklySchedules && weeklySchedules.length > 0" style="padding: 20px;">
+<h2>Weekly Schedules</h2>
+<div *ngFor="let item of weeklySchedules" align="left">
+  <div style="padding:10px;font-size: 18px;" > {{item.name}} </div>
+  <div *ngFor="let schedule of item.weekDaySchedules">
+    <div *ngIf="schedule.actions && schedule.actions.length > 0" style="padding:10px;">
+      <span>{{schedule.dayIndex}}</span>
+      <span class="calendar-action" *ngFor="let action of schedule.actions">
+        {{action.permission.name}} {{action.timeRange.from}} - {{action.timeRange.end}}
+      </span>
+    </div>
+  </div>
+</div>
+</div>

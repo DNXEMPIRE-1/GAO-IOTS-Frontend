@@ -1,0 +1,27 @@
+<div style="padding:10px">Event Monitor - {{ locationCounter() }} locations
+  <button mat-icon-button color="primary" (click)="backClick.emit()">
+    <mat-icon>close</mat-icon>
+</button>
+</div>
+<div class="container" >
+
+    <div *ngFor="let item of getLocations()"  (click)="showLocation(item)" class="slide"
+        [ngStyle]="{ color: selectedLocation === item? '#e9ecef': '#fff' }"
+    >
+        <div *ngIf="!item.image" class="location-item"
+            matTooltip="{{item.name}}"
+            style='background:url("./assets/images/toronto.jpg");background-size: cover;' >
+            {{ item.name | nameFormat}}
+        </div>
+        <div *ngIf="item.image"  class="location-item"
+            matTooltip="{{item.name}}"
+            style='background:url({{item.image}});background-size: cover;'>
+            {{ item.name | nameFormat}}
+        </div>
+    </div>
+</div>
+<div style="margin:20px;border: 1px solid #888;">
+  <h2 style="padding:10px"  *ngIf="selectedLocation">{{selectedLocation.name}}</h2>
+  <div ><canvas #canvas ></canvas></div>
+</div>
+<div class="text-danger">{{getStatus()}}</div>

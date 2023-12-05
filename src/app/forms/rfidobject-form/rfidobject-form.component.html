@@ -1,0 +1,15 @@
+	<mat-form-field appearance="fill" style="display: block;">
+		<mat-label>Name</mat-label>
+		<input matInput name="name" id="name" type="text" required placeholder="Please specify the name of the tracking object" [(ngModel)]="entity.name" #name="ngModel"/>
+    <span class="text-danger" *ngIf="(name.touched) && name.errors?.['required']">name is required !</span>
+	</mat-form-field>
+	<mat-form-field appearance="fill" style="display: block;">
+		<mat-label>Description</mat-label>
+		<input matInput name="description" type="text" placeholder="Please specify the description of the RFID Tracking object" [(ngModel)]="entity.description" />
+	</mat-form-field>
+<app-rfidobject-attributes-form [attributes]="entity.attributes" [types]="types" (creator)="addField()" (remover)="removeField($event)" (defineOptions)="defineOptions($event)"></app-rfidobject-attributes-form>
+
+<div style="padding:20px">
+  <button mat-raised-button class="btn btn-primary" (click)="!name.errors && saver.emit()" style="margin-right:20px">{{saveTitle}}</button>
+  <button mat-raised-button class="btn btn-primary"  (click)="discarder.emit()">Cancel</button>
+</div>

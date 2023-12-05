@@ -1,0 +1,10 @@
+.schedule-item {
+  margin: 3px;
+
+}
+.schedule-type {
+  margin-left: 10px;
+  cursor: pointer;
+  color: blue;
+}
+

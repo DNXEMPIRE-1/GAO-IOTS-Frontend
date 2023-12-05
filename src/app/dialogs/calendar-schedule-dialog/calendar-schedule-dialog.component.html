@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Schedule for {{ calendarSchedule.date | date: 'fullDate' }} </h1>
+  <div mat-dialog-content>
+
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label class="reportfield">Schedule Name</mat-label>
+      <input matInput name="name" type="text" required minlength="2"  placeholder="schedule name"  [(ngModel)]="calendarSchedule.name" #name="ngModel"/>
+        <div>&nbsp;
+          <span class="text-danger" *ngIf="(name.touched) &&  name.errors?.['required']">name is required !</span>
+        </div>
+    </mat-form-field>
+    <div *ngFor="let item of calendarSchedule.actions" >
+      <span class="schedule-action">{{item.permission.name}} {{item.timeRange.from}} - {{item.timeRange.end}}</span>
+      <span (click)="removeAction(item)"  >X</span>
+    </div>
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label class="reportfield">Access Control Action</mat-label>
+        <mat-select [(ngModel)]="selectedPermission" required #action="ngModel">
+          <mat-option *ngFor="let item of permissions" [value] = item >{{item.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div>&nbsp;
+      <span class="text-danger" *ngIf="(action.touched) &&  action.errors?.['required']">action is required !</span>
+    </div>
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>From</mat-label>
+      <input matInput name="loginid" type="time" value="07:30:00"  required minlength="2"  placeholder="Time from"  [(ngModel)]="timeRange.from"/>
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>To</mat-label>
+      <input matInput name="loginid" type="time" required minlength="2"  placeholder="Time to"  [(ngModel)]="timeRange.end"/>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button (click)="!action.errors && update()">Add Action</button>
+    <button mat-raised-button (click)="!name.errors && !action.errors && save()">Save</button>
+  </div>
+
+
+
+

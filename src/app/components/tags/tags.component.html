@@ -1,0 +1,56 @@
+<div class="container" >
+
+  <div><span style="font-size:20px;font-weight:bold">RFID Tag Management</span>
+    <button mat-icon-button (click)="backHome()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <ng-container *ngIf="!status">
+    <div style="padding:10px">
+        <button class="btn btn-primary" (click)="createTag()">New Tag</button>
+
+    <mat-paginator [length]="totalElements" class="reportfield"
+                [pageSize]="pageSize"
+                [pageIndex]="pageIndex"
+                [pageSizeOptions]="[10, 25, 50, 100]"
+                (page)="onPage($event);"
+                aria-label="Select page">
+        </mat-paginator>
+        <button mat-icon-button matTooltip="Refresh" (click)="getTags()">
+          <mat-icon >refresh</mat-icon>
+         </button>
+    </div>
+    <table *ngIf="dataSource != null" mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+      <ng-container matColumnDef="tagId">
+          <th mat-header-cell *matHeaderCellDef>Tag ID</th>
+          <td mat-cell *matCellDef="let element" (click)="updateTag(element)" style="cursor:pointer;color:darkblue" align="left"> {{element.tagId}} </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element" (click)="updateTag(element)" align="left">
+            <span *ngIf="element.entityId" >Assigned</span>
+          </td>
+      </ng-container>
+      <ng-container matColumnDef="activationDate">
+          <th mat-header-cell *matHeaderCellDef>Activation Date</th>
+          <td mat-cell *matCellDef="let element" (click)="updateTag(element)" class="link" align="left"> {{element.activationDate | date:'medium'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="expirationDate">
+        <th mat-header-cell *matHeaderCellDef>Expiration Date</th>
+        <td mat-cell *matCellDef="let element" (click)="updateTag(element)" class="link" align="left"> {{element.expirationDate | date:'medium' }} </td>
+      </ng-container>
+      <ng-container matColumnDef="registrationDate">
+        <th mat-header-cell *matHeaderCellDef> Registration Date </th>
+        <td mat-cell *matCellDef="let element" (click)="updateTag(element)" class="link" align="left"> {{element.registrationDate | date:'medium' }} </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell *matCellDef="let element" (click)="onDeleteTag(element)" class="link"><span style="cursor: pointer;">X</span></td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns;let i = index; " [ngClass]="{rowcolor: i % 2 == 0 }"></tr>
+  </table>
+
+  </ng-container>
+  <div *ngIf="status !=''" class="errorMessage">{{ status}} </div>
+</div>

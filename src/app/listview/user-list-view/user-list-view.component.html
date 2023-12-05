@@ -1,0 +1,30 @@
+<h2> System Users </h2>
+<div class="float-container" *ngIf="!status">
+  <div class="float-child">
+      <div style="padding: 10px;border-bottom: 1px solid #000;">
+        <span class="spacer"></span>
+        <button class="btn btn-primary" (click)="createUser()">
+          New User
+        </button>
+      </div>
+      <ng-container >
+          <mat-list style="width: 100%;padding-left: 10px;padding-right: 10px;" class="rfid-class1">
+            <mat-list-item style="border-bottom: 1px solid #000;" class="mat-list-option" *ngFor="let user of userList; let even=even;"
+            [ngStyle]="{backgroundColor: even==true ? '#e9ecef': '#fff'}"
+            (drop)="drop($event, user)" (dragover)="allowDrop($event)"   >
+            <mat-icon mat-list-icon color="primary" (click)="updateUser(user)">arrow_back</mat-icon>
+               <h3 style="font-size: large;" matLine (click)="updateUser(user)">{{user.name}} [{{user.authorities}}]</h3>
+               <button mat-icon-button (click)="onDeleteUser(user)">
+                   <mat-icon color="primary">delete</mat-icon>
+               </button>
+          </mat-list-item>
+            <mat-divider></mat-divider>
+          </mat-list>
+      </ng-container>
+  </div>
+  <div class="float-child">
+    <h2>System Roles</h2>
+    <div *ngFor="let item of system_roles" class="text-box" draggable="true" (dragstart)="drag(item)">{{item}}</div>
+  </div>
+</div>
+<div *ngIf="status" class="errorMessage">{{ status}} </div>

@@ -1,0 +1,37 @@
+.permission-control
+{
+  float: left;
+  margin-left: 5px;
+  border-radius: 5px;
+  border: 0px;
+  cursor: pointer;
+}
+.permission-control-item
+{
+  color: #000;
+}
+.permission-control-period
+{
+  padding: 2px;
+  background-color: blue;
+  border-radius: 5px;
+  border: 0px;
+  color: #fff;
+}
+.permission-control-calendar
+{
+  padding: 5px;
+  background-color: blue;
+  border-radius: 5px;
+  border: 0px;
+  color: #fff;
+}
+.selected-row
+{
+  background-color: #f0f0f0;
+}
+.permission-checkbox
+{
+  margin-left: 5px;
+  font-size: small;
+}

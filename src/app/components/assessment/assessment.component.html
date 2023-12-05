@@ -1,0 +1,92 @@
+<div style="padding:10px"><span style="font-size:large; padding: 10px;text-decoration: underline;">Assessment Period</span>
+<mat-form-field appearance="fill" class="example-form-field" >
+  <mat-label class="reportfield">Choose a date</mat-label>
+  <mat-date-range-input [rangePicker]="picker">
+  <input matStartDate placeholder="Start date" [(ngModel)]="startDate" class="reportfield">
+  <input matEndDate placeholder="End date" [(ngModel)]="endDate" class="reportfield">
+  </mat-date-range-input>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-date-range-picker #picker></mat-date-range-picker>
+</mat-form-field >
+<button mat-icon-button matTooltip="Refresh" (click)="showReport()">
+  <mat-icon >refresh</mat-icon>
+ </button>
+<button mat-icon-button color="primary" (click)="backClick.emit()">
+  <mat-icon>close</mat-icon>
+</button>
+</div>
+<div *ngIf="reportItem" class="container">
+  <select class="searchSelect" [(ngModel)]="searchField">
+    <option *ngFor="let column of reportItem.columns" [value]="column" >
+      {{column}}
+    </option>
+  </select>
+
+    <mat-form-field style="width:200px;margin-left:3px" class="no-line">
+      <input matInput type="text" placeholder="Search" [(ngModel)]="searchText" class="searchInput" maxlength="22">
+      <button mat-button *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="searchText=''">
+        <mat-icon>close</mat-icon>
+      </button>
+      <button mat-button *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="search()">
+        <mat-icon color="primary">search</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-paginator [length]="totalElements" class="reportfield"
+            [pageSize]="pageSize"
+            [pageIndex]="pageIndex"
+            [pageSizeOptions]="[10, 25, 50, 100]"
+            (page)="onPage($event);"
+            aria-label="Select page">
+    </mat-paginator>
+
+<div class="mat-elevation-z8">
+  <div *ngIf="reportData" align="left">
+    <mat-accordion>
+      <mat-expansion-panel  *ngFor="let row of reportData;let even=even;" >
+        <mat-expansion-panel-header class="data-header" >
+          <span class="data-row"  matTooltip="Show profile" (click)="$event.stopPropagation();showProfile(row.singleRowData)">
+            <img *ngIf="row.singleRowData.image" src={{row.singleRowData.image}} class="image-cell">
+            <mat-icon *ngIf="!row.singleRowData.image" color="primary">image</mat-icon>
+          </span>
+          <span class="data-row">{{row.singleRowData.timestamp| fieldFormat | date:'yyyy-MM-dd'}}</span>
+          <span class="data-row ">{{row.singleRowData.entityName}}</span>
+          <span class="data-hours">{{getHours(row.singleRowData)}}</span>
+          <span class="data-error" *ngIf="row.singleRowData.totalHours < 0"><mat-icon class="icon-small">error</mat-icon></span>
+        </mat-expansion-panel-header>
+        <div style="border: 1px solid #666;width:160px;border-radius: 10px;margin:5px;padding:10px">
+          <span class="add-row" (click)="addEvent(row.singleRowData)">Event Adjustment</span>
+        </div>
+        <div *ngIf="row.singleRowData.accessHistoryList" >
+          <div *ngFor="let accessEvent of row.singleRowData.accessHistoryList;" style="padding:5px">
+            <div *ngIf="accessEvent.adjustment==true" style="color:blue">
+              <span class="data-row" (click)="deleteEvent(row.singleRowData, accessEvent)">
+                <mat-icon class="icon-small" color="primary">delete</mat-icon>
+              </span>
+              <span (click)="editEvent(row.singleRowData, accessEvent)" class="data-row">{{accessEvent.timestamp | fieldFormat | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+              <span (click)="editEvent(row.singleRowData, accessEvent)" class="data-row">{{accessEvent.tagId}} | </span>
+              <span (click)="editEvent(row.singleRowData, accessEvent)" class="data-row">{{accessEvent.locationName}} | </span>
+              <span (click)="editEvent(row.singleRowData, accessEvent)" class="data-row">{{accessEvent.eventType | controlTypeDisplay}}  </span>
+            </div>
+            <div *ngIf="!accessEvent.adjustment==true" [ngStyle]="{textDecoration: accessEvent.valid == false ? 'line-through':'none'}">
+              <span class="data-row" *ngIf="accessEvent.valid" (click)="setEventStatus(accessEvent, false)">
+                <mat-icon class="icon-small" color="primary" >done</mat-icon>
+              </span>
+              <span class="data-row-invalid" *ngIf="!accessEvent.valid" (click)="setEventStatus(accessEvent,true)">
+                <mat-icon class="icon-small" style="color:red">cancel</mat-icon>
+              </span>
+              <span class="data-row">{{accessEvent.timestamp | fieldFormat | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+              <span class="data-row">{{accessEvent.tagId}} | </span>
+              <span class="data-row">{{accessEvent.locationName}} | </span>
+              <span class="data-row">{{accessEvent.eventType | controlTypeDisplay}}  </span>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <div *ngIf="!reportData" style="border: 1px solid #888 ;min-height:50px">
+    No data found for the report peroid, you may change the date range or search filter.
+  </div>
+</div>
+</div>

@@ -1,0 +1,35 @@
+.demo-table {
+  width: 100%;
+}
+
+.mat-column-day-of-week {
+  width: 32px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}
+
+.mat-column-actions {
+  padding-left: 16px;
+  font-size: 16px;
+}
+
+.mat-column-demo-weight {
+  font-style: italic;
+}
+
+.mat-column-demo-symbol {
+  width: 32px;
+  text-align: center;
+  font-weight: bold;
+}
+.selected-row
+{
+  background-color: #f0f0f0;
+}
+.time-period
+{
+  width: 20%;
+  float: left;
+  padding: 20px;
+}

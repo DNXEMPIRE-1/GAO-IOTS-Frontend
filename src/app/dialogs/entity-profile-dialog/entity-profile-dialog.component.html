@@ -1,0 +1,20 @@
+<div MatDialog>
+  <div mat-dialog-content>
+        <div *ngIf="entity.image"><img src={{entity.image}} class="responsive"></div>
+        <div appearance="fill" style="display: block;padding:5px" align="left">
+          <span class="profile-title">Name: </span><span class="profile-text">{{entity.name}} </span>
+          <span class="profile-title">Tag ID:</span><span class="profile-text"> {{entity.tagid}}</span>
+        </div>
+        <div align="left" style="display: block;padding:5px" >
+          <span class="profile-title">Registration Date: </span><span class="profile-text">{{entity.createDate | date:'yyyy-mm-dd'}}</span>
+          <span class="profile-title">Group: </span><span class="profile-text" *ngIf="group">{{group.name}}</span>
+        </div>
+        <div appearance="fill" style="display: block;padding:5px" *ngFor="let attribute of entity.attributes" align="left">
+          <span class="profile-title">{{attribute.name}}:</span><span class="profile-text">{{attribute.value }}</span>
+        </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Close</button>
+  </div>
+</div>
+

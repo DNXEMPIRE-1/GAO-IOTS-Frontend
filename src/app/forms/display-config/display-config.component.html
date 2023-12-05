@@ -1,0 +1,12 @@
+<div class="form-row" *ngIf="entity != null">
+  <mat-form-field appearance="fill" style="display: block;">
+      <mat-label>Display</mat-label>
+      <input type="number" matInput [(ngModel)]="entity.pageSize" />
+  <span matSuffix>items per page</span>
+  </mat-form-field>
+</div>
+<p>File Browser Display Fields Setting</p>
+<div *ngFor="let option of options">
+  <mat-slide-toggle color="primary" [(ngModel)]="option.selected" [checked]="option.selected" [disabled]="option.required">{{option.name}}</mat-slide-toggle>
+  <span *ngIf="option.required"> - Required</span>
+</div>

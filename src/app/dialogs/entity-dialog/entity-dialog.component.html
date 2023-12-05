@@ -1,0 +1,61 @@
+<div MatDialog>
+  <h1 mat-dialog-title>Entity Type: {{ data.rfidObject.name }} </h1>
+  <div mat-dialog-content>
+        <div align="left">
+          <span class="text-danger" *ngIf="name.touched && name.errors?.['required']">Name is required !</span>
+        </div>
+        <mat-form-field appearance="fill" style="display: block;">
+          <mat-label>Name</mat-label>
+          <input matInput name="name" id="name" type="text" required minlength="2" placeholder="Please specify the name of the entity" [(ngModel)]="entity.name" #name="ngModel"/>
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="display: block;">
+          <mat-label>Tag ID</mat-label>
+          <input type="text"
+                 placeholder="Enter tag ID"
+                 aria-label="Tag ID"
+                 matInput
+                 [formControl]="myControl"
+                 [matAutocomplete]="auto"
+                 [(ngModel)]="entity.tagid"
+                 >
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option.tagId" (onSelectionChange)="getSelected(option)">
+              {{option.tagId}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="display: block;" *ngFor="let attribute of entity.attributes" >
+          <mat-label>{{attribute.name}}</mat-label>
+          <input *ngIf="attribute.type =='Number'" required="{{attribute.required}}" matInput name={{attribute.name}}   type="number" placeholder="Please specify {{attribute.name}}" [(ngModel)]="attribute.value" />
+          <input *ngIf="attribute.type =='String'" required="{{attribute.required}}" matInput name={{attribute.name}}   type="text" placeholder="Please specify {{attribute.name}}" [(ngModel)]="attribute.value" />
+          <input *ngIf="attribute.type =='Date'" required="{{attribute.required}}" matInput name={{attribute.name}}   type="date" placeholder="Please specify {{attribute.name}}" [(ngModel)]="attribute.value" />
+          <mat-select *ngIf="attribute.type =='Selections'" matInput name={{attribute.name}}  placeholder="Please specify {{attribute.name}}" [(ngModel)]="attribute.value" >
+            <mat-option *ngFor="let value of attribute.selections" [value]="value">{{value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div *ngIf="entity.image">
+          <img src="{{entity.image}}" wdith="50px" height="50px" />
+          <mat-icon (click)="removeImage()">delete</mat-icon>
+        </div>
+
+        <mat-form-field appearance="fill" style="display: block;">
+          <div>
+            <!-- Fetch selected filed on change -->
+            <input matInput readonly name="image" />
+            <input
+              type="file"
+              #fileInput
+              id="uploadFile"
+              (change)="uploadImage($event)"
+              name="uploadFile"
+              multiple="multiple"
+              accept="image/*"
+            />
+          </div>
+        </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="onNoClick()">Close</button>
+    <button mat-raised-button (click)="!name.errors && onSave()">Save</button>
+  </div>
+</div>

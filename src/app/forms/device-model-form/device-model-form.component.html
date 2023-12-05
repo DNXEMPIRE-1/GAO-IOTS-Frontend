@@ -1,0 +1,15 @@
+  <div style="border: 1px solid blue">
+    <h3>{{deviceModel.name}} ({{deviceModel.createDate | date: 'fullDate'}})</h3>
+    <mat-form-field appearance="fill" style="display: block;" *ngFor="let attribute of deviceModel.attributes" >
+      <mat-label>{{attribute.name}}</mat-label>
+      <input *ngIf="attribute.type =='Number'" required="{{attribute.required}}" matInput name={{attribute.name}}   type="number" placeholder="Please specify {{attribute.name}}" [(ngModel)]="attribute.value" />
+      <input *ngIf="attribute.type =='String'" required="{{attribute.required}}" matInput name={{attribute.name}}   type="text" placeholder="Please specify {{attribute.name}}" [(ngModel)]="attribute.value" />
+      <input *ngIf="attribute.type =='Date'" required="{{attribute.required}}" matInput name={{attribute.name}}   type="date" placeholder="Please specify {{attribute.name}}" [(ngModel)]="attribute.value" />
+      <mat-select *ngIf="attribute.type =='Selections'" matInput name={{attribute.name}}  placeholder="Please specify {{attribute.name}}" [(ngModel)]="attribute.value" >
+        <mat-option *ngFor="let value of attribute.selections" [value]="value">{{value}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <app-antenna-form *ngIf="deviceModel.antennas" [deviceModel]="deviceModel" [deviceConfiguration]="true"></app-antenna-form >
+  </div>
+
+

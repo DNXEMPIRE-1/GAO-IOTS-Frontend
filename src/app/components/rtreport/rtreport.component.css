@@ -1,0 +1,14 @@
+.chart {
+  position: relative;
+  min-height: unset;
+  width: 80%;
+}
+.date-field {
+  margin: 0 8px 16px 0;
+}
+.location-image {
+  width: 90%;
+  object-fit: contain;
+  max-height: 600px;
+  border: 1px solid #ccc;
+}

@@ -1,0 +1,38 @@
+<div class="content" role="main">
+  <mat-drawer-container autosize>
+        <h2 class="heading-21921">System User Profile</h2>
+      <div style="padding: 30px;">
+        <mat-form-field appearance="fill" style="display: block;">
+          <mat-label>Login ID</mat-label>
+          <input matInput name="name" type="text" required minlength="2" placeholder="Please specify login ID" [(ngModel)]="user.name" />
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="display: block;">
+          <mat-label>Email</mat-label>
+          <input matInput name="email" type="email" required minlength="2" placeholder="Please specify email address" [(ngModel)]="user.email" />
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="display: block;">
+          <mat-label>First Name</mat-label>
+          <input matInput name="firstname" type="text" required minlength="2" placeholder="Please specify first name" [(ngModel)]="user.firstname" />
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="display: block;">
+          <mat-label>Last Name</mat-label>
+          <input matInput name="firstname" type="text" required minlength="2" placeholder="Please specify last name" [(ngModel)]="user.lastname" />
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="display: block;">
+          <mat-label>User Role(s)</mat-label>
+          <input matInput name="userrole" type="text" required minlength="2" placeholder="User roles" [(ngModel)]="user.authorities" disabled/>
+        </mat-form-field>
+        <div align="left" style="padding: 5px">
+        <mat-label >Registration date: {{user.addTime |  fieldFormat }} </mat-label>
+        </div>
+        <div>
+          <button style="margin-right:20px" class="btn btn-primary" (click)="onUpdate()">Update</button>
+          <button style="margin-right:20px" class="btn btn-primary" (click)="onBack()">Back</button>
+          <a (click)="panelName('changepassword')" style="cursor: pointer;color:blue">Reset password</a>
+    </div>
+    </div>
+  </mat-drawer-container>
+</div>
+
+
+
